@@ -65,13 +65,20 @@ export default class FieldLimitsSettingsPage extends PageModification {
     this.applyLimitsList(limitsStats);
   }
 
+  getSumValues(stat) {
+    return stat.issues.reduce((acc, issue) => acc + issue.countValues, 0);
+  }
+
   doColorCardsIssue(limitsStats) {
     Object.keys(limitsStats).forEach(limitKey => {
       const stat = limitsStats[limitKey];
       if (isEmpty(stat.issues)) return;
 
-      if (stat.issues.length > stat.limit)
-        stat.issues.forEach(issue => {
+      const sumCountValues = this.getSumValues(stat);
+
+      if (sumCountValues > stat.limit)
+        stat.issues.forEach(({ issue, countValues }) => {
+          if (countValues === 0) return;
           issue.style.backgroundColor = COLORS.OVER_WIP_LIMITS;
         });
     });
@@ -119,10 +126,10 @@ export default class FieldLimitsSettingsPage extends PageModification {
 
       if (!fieldId || !fieldValue) return;
 
-      const amountOfFieldIssuesOnBoard = stat.issues.length;
+      const sumValues = this.getSumValues(stat);
       const limitOfFieldIssuesOnBoard = stat.limit;
 
-      switch (Math.sign(limitOfFieldIssuesOnBoard - amountOfFieldIssuesOnBoard)) {
+      switch (Math.sign(limitOfFieldIssuesOnBoard - sumValues)) {
         case -1:
           currentIssueNode.style.backgroundColor = COLORS.OVER_WIP_LIMITS;
           break;
@@ -134,13 +141,13 @@ export default class FieldLimitsSettingsPage extends PageModification {
           break;
       }
 
-      currentIssueNode.innerHTML = `${amountOfFieldIssuesOnBoard}/${limitOfFieldIssuesOnBoard}`;
+      currentIssueNode.innerHTML = `${sumValues}/${limitOfFieldIssuesOnBoard}`;
 
       fieldNode.setAttribute(
         'title',
         fieldLimitTitleTemplate({
           limit: limitOfFieldIssuesOnBoard,
-          current: amountOfFieldIssuesOnBoard,
+          current: sumValues,
           fieldValue,
           fieldName: this.normalizedExtraFields.byId[fieldId].name,
         })
@@ -158,11 +165,14 @@ export default class FieldLimitsSettingsPage extends PageModification {
     return someSwimline.getAttribute('aria-label').indexOf('custom:') !== -1;
   }
 
-  getExtraFieldHasValue(exField, value) {
-    let result = false;
+  getCountValuesFromExtraField(exField, value) {
+    // find all variants this value
+    const rgx = new RegExp(value, 'g');
+    let result = 0;
     if (exField.childNodes instanceof NodeList) {
       exField.childNodes.forEach(el => {
-        result = result || el.innerText.indexOf(value) > -1;
+        const countSearched = (el.innerText.match(rgx) || []).length;
+        result += countSearched;
       });
     }
     return result;
@@ -181,13 +191,20 @@ export default class FieldLimitsSettingsPage extends PageModification {
         if (swimlaneId && !stat.swimlanes.includes(swimlaneId)) return;
 
         const fieldNameSt = this.normalizedExtraFields.byId[stat.fieldId].name;
+        const fieldValue = stat.fieldValue.replace(/^∑/, '');
+        const isSumValues = stat.fieldValue[0] === '∑';
 
         for (const exField of extraFieldsForIssue) {
           const tooltipAttr = exField.getAttribute('data-tooltip');
           const fieldName = tooltipAttr.split(':')[0];
-
-          if (fieldName === fieldNameSt && this.getExtraFieldHasValue(exField, stat.fieldValue)) {
-            stats[fieldLimitKey].issues.push(issue);
+          const countValues = this.getCountValuesFromExtraField(exField, fieldValue);
+          if (fieldName === fieldNameSt) {
+            stats[fieldLimitKey].issues.push({
+              // eslint-disable-next-line no-nested-ternary, prettier/prettier
+              countValues: isSumValues ? countValues : countValues > 0 ? 1 : 0,
+              issue,
+            });
+            stats[fieldLimitKey].isSumValues = isSumValues;
           }
         }
       });
