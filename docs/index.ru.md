@@ -9,13 +9,13 @@
 При наведении курсора мыши на bar всплывает подсказка (title) в которой показывается название
 ассоциированной колонки доски с bar и количество задач в этой колонке для этого swimline.
 
-![Chart Bar](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jirahelper_ChartBar.gif)
+![Chart Bar](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_ChartBar.gif)
 
 Удобно использовать при большом количестве swimlane.
 
 Например, когда swimlane используются для отображения задач по Epic или Stories или Assigne.
 
-![Settings Base swimlane on](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jirahelper_swimlane_base_swimlanes_on.gif)
+![Settings Base swimlane on](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_swimlane_base_swimlanes_on.gif)
 
 
 ## Flag on Issue panel
@@ -28,11 +28,11 @@
 
 Пример JIRA Cloud:
 
-![issue flag jira cloud](https://github.com/TinkoffCreditSystems/jira-helper/raw/images/features/jirahelper_issue_flag.gif)
+![issue flag jira cloud](https://github.com/pavelpower/jira-helper/raw/images/features/jirahelper_issue_flag.gif)
 
 Пример JIRA v7.\*.\*:
 
-![issue flag jira 7](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jirahelper_issue_flag_jira7.gif)
+![issue flag jira 7](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_issue_flag_jira7.gif)
 
 
 ## Template for Description
@@ -41,7 +41,7 @@
 
 При помощи которых можно сохранить Template для этого типа задач к себе в localStorage браузера (шаблон сохранится к на вашем компьютере).
 
-![description template](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jirahelper_description_template.gif)
+![description template](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_description_template.gif)
 
 
 ## Tetris-planning for Scrum
@@ -64,7 +64,7 @@
 
 Тогда, в заголовке Sprint будут видны суммы по Story Points от задач, которые еще не взяты в работу (_серые_), в работе (_синие_) и выполненные (_зеленые_).
 
-![sprint head with story points](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jirahelper_sprinthead_with_storypoints.png)
+![sprint head with story points](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_sprinthead_with_storypoints.png)
 
 Плагин **jira-helper** добавляет функционал позволяющий визуализировать оценку сразу по нескольким числовым параметрам.
 
@@ -85,18 +85,18 @@
 
 _"Board Settings (Scrum board) -> Estimates"_  Сохранять значение может только Администратор board.
 
-![tetris planning](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jirahelper_tetris_planning.gif)
+![tetris planning](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_tetris_planning.gif)
 
 
 ## Printing many stickers
 
 Используется для печати множества стикеров при помощи офисного лазерного принтера.
 
-![как использозвать печать](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jirahelper_jql_print.gif)
+![как использозвать печать](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_jql_print.gif)
 
 Для печати стикеров на обычной бумаге формата A4 можно воспользоваться [шаблоном](chrome-extension://egmbomekcmpieccamghfgjgnlllgbgdl/options.html)
 
-![шаблон печати стикеров](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jirahelper_jql_print_template.gif)
+![шаблон печати стикеров](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_jql_print_template.gif)
 
 Шаблон для печати использует 
 * шрифты [GOST A](https://ffont.ru/font/gost-type-a) и [GOST B](https://ffont.ru/font/gost-type-b)
@@ -104,7 +104,7 @@ _"Board Settings (Scrum board) -> Estimates"_  Сохранять значени
 * цветное отображение связанного эпика задачи (в примере ниже Epic Name: "Песни")
 
 Это позволяет удобно использовать напечатанные стикеры на доске таким образом
-![sample position a stickers on a desck](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jirahelper_jql_print_stiker_position_on_desk_w600.png)
+![sample position a stickers on a desck](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_jql_print_stiker_position_on_desk_w600.png)
 
 
 ## WIP-limits for several columns (CONWIP)
@@ -122,7 +122,7 @@ _WIP – work in progress_
 
 _"Board Settings -> Columns"_
 
-![settings wip-limit for column](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/group-wip-limit.gif)
+![settings wip-limit for column](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/group-wip-limit.gif)
 
 При этом, можно пользоваться функциональностью ограничений колонок предоставленной JIRA!
 
@@ -130,10 +130,10 @@ _"Board Settings -> Columns"_
 
 При нарушении wip-limit background колонки подсветиться красным цветом.
 
-С версии [2.1.0](https://github.com/TinkoffCreditSystems/jira-helper/releases/tag/2.1.0) возможно учитывать или не учитывать запросы типа sub-task в CONWIP лимитах.
+С версии [2.1.0](https://github.com/pavelpower/jira-helper/releases/tag/2.1.0) возможно учитывать или не учитывать запросы типа sub-task в CONWIP лимитах.
 
 Для этого нужно выбрать соответствующую настройку "Column Constraint"
-![sub-task & CONWIP](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jirahelper_CONWIP_with_sub-task.gif)
+![sub-task & CONWIP](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_CONWIP_with_sub-task.gif)
 
 
 ## WIP-limits for Swimlanes
@@ -149,7 +149,7 @@ _"Board Settings -> Columns"_
 Сохранять значение может только Администратор board.
 
 _"Board Settings -> Swimlane"_
-![swimlane wip-limits](https://github.com/TinkoffCreditSystems/jira-helper/blob/images/features/jirahelper_wip_limit_settings_swim_ex.gif)
+![swimlane wip-limits](https://github.com/pavelpower/jira-helper/blob/images/features/jirahelper_wip_limit_settings_swim_ex.gif)
 
 Используя комбинацию wip-ограничений колонок и swimlane вы можете визуализировать управление сложной системой с разными типами и классами задач.
 
@@ -161,8 +161,54 @@ _"Board Settings -> Swimlane"_
 
 При этом, вы можете указать в каких колонках и swimline учитывать какой вам нужно WIP-лимит на человека.
 
-![swimlane wip-limits](https://github.com/TinkoffCreditSystems/jira-helper/blob/images/features/WIP-limit-personal.gif)
 
+## WIP-limit for Field Value
+
+Используйте ограничение указанное по значению поля.
+В разделе настройки доски (Configure), влкадка "Card Layout", появляеться кнопка "Edit WIP limits by field"
+
+Нажмите ее и сможете настроить WIP-лимит по значению полей которые видны на "Kanban board".
+
+Где
+* `Field` — можно выбрать по какому полю будет проверятся значение
+* `Field Value` — какое значение должно совпасть со значением на карточке, чтобы оно было учтено в WIP-лимите
+* `Visual Name` — какое имя показать над доской, где будет показано значение "количество/wip-limit)
+* `WIP Limit` — значение ограничения, при превышении которого, карточки будут подсвечены красным цветом
+* `Columns / Swimlane` — для какого пересечения колонок и swimlane учитывать это ограничение
+
+В обычном режиме считается количество карточек которое имеет значение `Field Value` для поля `Field`.
+
+Данный тип ограничения можно использовать для реализации практики **Capacity Allocation**.
+
+В рамках этой практики, необходимо учесть тот случай, когда на карточке можно указать сколько ресурсов команды будет затрачено,
+и каких именно ресурсов. А так же можно указать какая именно команда будет тартить свои ресурсы.
+
+Чтобы воспользвоаться этой практикой используйте специальный режим работы `WIP-limit for Field Value` 
+в котором будет учитыватся **не количество** карточек со значением `Field Value`, а количество значений в карточках.
+
+Чтобы использвоать этот режим, вам надо в поле `Field Value` перед значением ввести символ `∑`, пример:
+
+`Field Value` = `∑Frontend` 
+
+Теперь в карточках в видемом поле на доске можно указать значения через запятую:
+
+* карточка 1: `Frontend, Backend, Design`
+* карточка 1: `Backend, Design`
+* карточка 3: `Frontend, Design`
+* карточка 4: `Frontend, Frontend, Design`
+
+Подсчитанная сумма будет `Frontend` = `4`
+
+Так же, в случае если карточка будет требовать больше ресурсов, то можно их учесть не только перечислением, но и числом
+
+* карточка 1: `Frontend, Backend, Design`
+* карточка 1: `Backend, Design`
+* карточка 3: `Frontend, Design`
+* карточка 4: `Frontend^3, Design`
+
+В этом случае значение `Frontend^3` будет эквивалентно `Frontend, Frontend, Frontend`.
+
+И в этом случае подсчитанная сумма будет `Frontend` = `5`
 
 ## SLA-line for Control Chart
 
@@ -180,11 +226,11 @@ _Control Chart - это наверное то, за что можно любит
 
 Значение SLA указано в днях.
 
-![sla-line for control chart](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jirahelper_sla_for_controlchart.gif)
+![sla-line for control chart](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_sla_for_controlchart.gif)
 
-А возле линии SLA, начиная с версии [2.6.0](https://github.com/TinkoffCreditSystems/jira-helper/releases/tag/2.6.0)
+А возле линии SLA, начиная с версии [2.6.0](https://github.com/pavelpower/jira-helper/releases/tag/2.6.0)
 вы можете видите процентиль, рассчитанный по количеству событий на контрольной диаграмме.
-![sla-line for control chart](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/control_chart_sla_with_percentile.png)
+![sla-line for control chart](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/control_chart_sla_with_percentile.png)
 
 ## Ruler of measuring for control chart
 
@@ -197,20 +243,20 @@ _Control Chart - это наверное то, за что можно любит
 Выбирите функцию в выпадающем поле `Ruler`, рядом с полем `SLA`, и укажите исследуемую размерность.
 
 _На картинке использована функция Фиббоначи, размерность "6"_
-![Fibonacci distribution](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/control_chart_ruler_selected_type.png)
+![Fibonacci distribution](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/control_chart_ruler_selected_type.png)
 
 Можем видеть как время затраченное на выполнение здач **не** соответсвует размерности, функция Фиббоначи не подходит для оценки задач.
-![Fibonacci distribution](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/control_chart_ruler_switch_on.png)
+![Fibonacci distribution](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/control_chart_ruler_switch_on.png)
 
 ## Blurring of secret data
 
 Если вам необходимо скрыть данные о ваших задачах, но показать модель вашей визуализации коллегам,
 то вы можете размыть эти данные через контекстное меню включив функцию "blur secret data"
 
-![the blurring of secret data](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/call_context_menu_use_blurre_secret_data.png)
+![the blurring of secret data](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/call_context_menu_use_blurre_secret_data.png)
 
 Результат
-![secret data is blurred](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/blurred_secret_data.png)
+![secret data is blurred](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/blurred_secret_data.png)
 
 
 ## Identity request from Jira-Helper
@@ -218,7 +264,7 @@ _На картинке использована функция Фиббонач�
 Your administrators of JIRA can identify requests from jira-helper by the special request header
 "browser-plugin: jira-helper/{version}".
 
-![jira-helper-reques](https://raw.githubusercontent.com/TinkoffCreditSystems/jira-helper/images/features/jira-helper-request_300px.png)
+![jira-helper-reques](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jira-helper-request_300px.png)
 
 ## Wip limit on cell
 
