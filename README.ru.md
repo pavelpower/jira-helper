@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/TinkoffCreditSystems/jira-helper.svg?branch=master)](https://travis-ci.com/TinkoffCreditSystems/jira-helper)
+[![Build Status](https://travis-ci.com/pavelpower/jira-helper.svg?branch=master)](https://travis-ci.com/pavelpower/jira-helper)
 
 # Расширение для Google Chrome
 
@@ -19,7 +19,7 @@ _version 2.6.0_
 
 ## Ведение задач проекта
 
-Все задачи заводятся на [github issues](https://github.com/TinkoffCreditSystems/jira-helper/issues)
+Все задачи заводятся на [github issues](https://github.com/pavelpower/jira-helper/issues)
 
 Перед добавлением задачи убедитесь, что подобной задачи еще не добавляли.
 Обязательно проверьте закрытые задачи, возможно к готовящейся версии такая задача уже добавлена.
@@ -27,7 +27,7 @@ _version 2.6.0_
 
 ### Для добавления нового функционала
 
-[Создайте новую задачу](https://github.com/TinkoffCreditSystems/jira-helper/issues/new)
+[Создайте новую задачу](https://github.com/pavelpower/jira-helper/issues/new)
 
 После описание задачи, добавьте только такие атрибуты:
 
@@ -39,7 +39,7 @@ _version 2.6.0_
 
 _Когда функционал работает не так, как ожидаете._
 
-[Создайте новую задачу](https://github.com/TinkoffCreditSystems/jira-helper/issues/new)
+[Создайте новую задачу](https://github.com/pavelpower/jira-helper/issues/new)
 
 После описание задачи, добавьте только такие атрибуты:
 
@@ -49,7 +49,7 @@ _Когда функционал работает не так, как ожида
 
 ### Добавить описание проблемы (бага)
 
-[Создайте новую задачу](https://github.com/TinkoffCreditSystems/jira-helper/issues/new)
+[Создайте новую задачу](https://github.com/pavelpower/jira-helper/issues/new)
 
 После описание задачи, добавьте только такие аттрибуты:
 
@@ -118,7 +118,7 @@ npm run dev
 
 Официальное расширение публикуется в ["Chrome WebStore"](https://chrome.google.com/webstore/detail/jira-helper/egmbomekcmpieccamghfgjgnlllgbgdl)
 
-Публикация происходит после [сборки релиза на github](https://github.com/TinkoffCreditSystems/jira-helper/releases)
+Публикация происходит после [сборки релиза на github](https://github.com/pavelpower/jira-helper/releases)
 
 Версия релиза совпадает с версией приложения в [package.json](./package.json)
 

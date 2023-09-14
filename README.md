@@ -1,4 +1,4 @@
-![Build Status](https://github.com/TinkoffCreditSystems/jira-helper/workflows/Node%20CI/badge.svg)
+![Build Status](https://github.com/pavelpower/jira-helper/workflows/Node%20CI/badge.svg)
 
 ## “jira-helper” features
 
@@ -17,14 +17,14 @@ _version 2.6.0_
 
 ## Issuing project tasks
 
-All tasks are created at [github issues](https://github.com/TinkoffCreditSystems/jira-helper/issues)
+All tasks are created at [github issues](https://github.com/pavelpower/jira-helper/issues)
 
 Before creating a task, please make sure that a similar task was not created earlier. Please be sure to check closed tasks - there is a chance that your request has already been fulfilled and will be released soon.
 
 
 ### Requesting a feature
 
-[Create a new task](https://github.com/TinkoffCreditSystems/jira-helper/issues/new)
+[Create a new task](https://github.com/pavelpower/jira-helper/issues/new)
 
 After adding description, please specify the following attributes only:
 
@@ -36,7 +36,7 @@ After adding description, please specify the following attributes only:
 
 _In case some feature doesn’t operate as expected._
 
-[Create a new task](https://github.com/TinkoffCreditSystems/jira-helper/issues/new)
+[Create a new task](https://github.com/pavelpower/jira-helper/issues/new)
 
 After adding description, please specify the following attributes only:
 
@@ -46,7 +46,7 @@ After adding description, please specify the following attributes only:
 
 ### Adding a description for a bug/problem
 
-[Create a new task](https://github.com/TinkoffCreditSystems/jira-helper/issues/new)
+[Create a new task](https://github.com/pavelpower/jira-helper/issues/new)
 
 After adding description, please specify the following attributes only:
 
@@ -107,7 +107,7 @@ Please use `english` language only to name branches and commits.
 
 The official version of the extension is published in ["Chrome WebStore"](https://chrome.google.com/webstore/detail/jira-helper/egmbomekcmpieccamghfgjgnlllgbgdl)
 
-The extension is published after the release [is assembled at github](https://github.com/TinkoffCreditSystems/jira-helper/releases)
+The extension is published after the release [is assembled at github](https://github.com/pavelpower/jira-helper/releases)
 
 Release version is the same as the application version in package.json  [package.json](./package.json) and the version published in ["Chrome WebStore"](https://chrome.google.com/webstore/detail/jira-helper/egmbomekcmpieccamghfgjgnlllgbgdl)
 
