@@ -165,17 +165,37 @@ export default class FieldLimitsSettingsPage extends PageModification {
     return someSwimline.getAttribute('aria-label').indexOf('custom:') !== -1;
   }
 
+  // Pro, Pro^2
   getCountValuesFromExtraField(exField, value) {
     // find all variants this value
-    const rgx = new RegExp(value, 'g');
     let result = 0;
     if (exField.childNodes instanceof NodeList) {
       exField.childNodes.forEach(el => {
-        const countSearched = (el.innerText.match(rgx) || []).length;
-        result += countSearched;
+        const search = el.innerText.split(',');
+        search.forEach(txt => {
+          // sample: Team^2 - it is count = 2, Team it is count = 1
+          const itemVal = txt.trim().split('^');
+          const type = itemVal[0].trim();
+          // eslint-disable-next-line prefer-template
+          const numb = (itemVal[1] + '').trim();
+          const count = /^[0-9]*$/.test(numb) ? Number(numb) : 1;
+          if (value === type) {
+            result += count;
+          }
+        });
       });
     }
     return result;
+  }
+
+  getHasValueFromExtraField(exField, value) {
+    let result = false;
+    if (exField.childNodes instanceof NodeList) {
+      exField.childNodes.forEach(el => {
+        result = result || el.innerText.split(',').reduce((acc, val) => acc || val.trim() === value, false);
+      });
+    }
+    return result ? 1 : 0;
   }
 
   countAmountPersonalIssuesInColumn(column, stats, swimlaneId) {
@@ -197,11 +217,14 @@ export default class FieldLimitsSettingsPage extends PageModification {
         for (const exField of extraFieldsForIssue) {
           const tooltipAttr = exField.getAttribute('data-tooltip');
           const fieldName = tooltipAttr.split(':')[0];
-          const countValues = this.getCountValuesFromExtraField(exField, fieldValue);
+          const countValues = isSumValues
+            ? this.getCountValuesFromExtraField(exField, fieldValue)
+            : this.getHasValueFromExtraField(exField, fieldValue);
+
           if (fieldName === fieldNameSt) {
             stats[fieldLimitKey].issues.push({
               // eslint-disable-next-line no-nested-ternary, prettier/prettier
-              countValues: isSumValues ? countValues : countValues > 0 ? 1 : 0,
+              countValues,
               issue,
             });
             stats[fieldLimitKey].isSumValues = isSumValues;
