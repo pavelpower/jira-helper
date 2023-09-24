@@ -95,7 +95,7 @@ export const getCurrentRoute = () => {
     return Routes.BOARD;
   }
 
-  if (pathname.startsWith('/browse')) {
+  if (pathname.startsWith('/browse') || pathname.startsWith('/jira/browse')) {
     return params.get('jql') ? Routes.SEARCH : Routes.ISSUE;
   }
 
@@ -116,8 +116,8 @@ export const getSettingsTab = () => {
 };
 
 export const getIssueId = () => {
-  if (window.location.pathname.startsWith('/browse')) {
-    return window.location.pathname.split('browse/')[2];
+  if (window.location.pathname.startsWith('/browse') || window.location.pathname.startsWith('/jira/browse')) {
+    return window.location.pathname.split('/browse/')[1];
   }
 
   if (getSearchParam('selectedIssue') && (getSearchParam('view') || getSearchParam('modal')))
