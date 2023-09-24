@@ -24,12 +24,25 @@ const boardEstimationDataURL = 'greenhopper/1.0/rapidviewconfig/estimation.json?
 
 const invalidatedProperties = {};
 
+const contextPath = (() => {
+  if (window.AJS && typeof window.AJS.contextPath === 'function') {
+    return `${window.location.origin}${window.AJS.contextPath()}`;
+  }
+  if (window.WRM && typeof window.WRM.contextPath === 'function') {
+    return `${window.location.origin}${window.WRM.contextPath()}`;
+  }
+  if (window.location.toString().split('/')[3] === 'jira') {
+    return `${window.location.origin}/jira`;
+  }
+  return window.location.origin;
+})();
+
 const requestJira = request([
   defaultHeaders({
     'browser-plugin': `jira-helper/${process.env.PACKAGE_VERSION}`,
   }),
   transformUrl({
-    baseUrl: `${window.location.origin}/rest/`,
+    baseUrl: `${contextPath}/rest/`,
   }),
   deduplicateCache(),
   memoryCache({ allowStale: true }),
