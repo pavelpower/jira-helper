@@ -117,7 +117,7 @@ export const getSettingsTab = () => {
 
 export const getIssueId = () => {
   if (window.location.pathname.startsWith('/browse')) {
-    return window.location.pathname.split('/')[2];
+    return window.location.pathname.split('browse/')[2];
   }
 
   if (getSearchParam('selectedIssue') && (getSearchParam('view') || getSearchParam('modal')))
