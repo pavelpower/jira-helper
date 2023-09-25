@@ -24,17 +24,19 @@ const boardEstimationDataURL = 'greenhopper/1.0/rapidviewconfig/estimation.json?
 
 const invalidatedProperties = {};
 
-const contextPath = (() => {
-  if (window.AJS && typeof window.AJS.contextPath === 'function') {
-    return `${window.location.origin}${window.AJS.contextPath()}`;
+const getContextPath = (() => {
+  const { contextPath, location } = window;
+
+  // http://host:port/context/rest/api-name/api-version/resource-name
+  if (typeof contextPath === 'string') {
+    return `${location.origin}${contextPath}`;
   }
-  if (window.WRM && typeof window.WRM.contextPath === 'function') {
-    return `${window.location.origin}${window.WRM.contextPath()}`;
+  // condition for installed jira in house of you company without cloud jira
+  if (location.hostname.indexOf('atlassian.net') === -1 && location.toString().split('/')[3] === 'jira') {
+    return `${location.origin}/jira`;
   }
-  if (window.location.toString().split('/')[3] === 'jira') {
-    return `${window.location.origin}/jira`;
-  }
-  return window.location.origin;
+
+  return location.origin;
 })();
 
 const requestJira = request([
@@ -42,7 +44,7 @@ const requestJira = request([
     'browser-plugin': `jira-helper/${process.env.PACKAGE_VERSION}`,
   }),
   transformUrl({
-    baseUrl: `${contextPath}/rest/`,
+    baseUrl: `${getContextPath}/rest/`,
   }),
   deduplicateCache(),
   memoryCache({ allowStale: true }),
