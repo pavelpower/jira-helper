@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import Draggable from 'gsap/Draggable';
-import { TweenLite, gsap } from 'gsap';
 import { PageModification } from '../shared/PageModification';
+import { extensionApiService } from '../shared/ExtensionApiService';
 import { getChartLinePosition, getChartTics, getChartValueByPosition } from './utils';
 
 class ResizableDraggableGrid {
@@ -46,6 +46,13 @@ class ResizableDraggableGrid {
     this.gridSelectedOption = 'linear_0'; // type-in-grid-options_index
     this.gridContainer = null;
     this.gridDraggable = null;
+
+    // gsap don't work in firefox, so we load library only when we create this chart
+    // eslint-disable-next-line global-require
+    const { TweenLite, gsap } = require('gsap');
+
+    this.tweenLite = TweenLite;
+    this.gsap = gsap;
   }
 
   handleChangeOption = val => {
@@ -59,10 +66,10 @@ class ResizableDraggableGrid {
     this.gridDraggable.appendChild(resizer);
 
     const rect1 = this.gridDraggable.getBoundingClientRect();
-    TweenLite.set(resizer, { x: rect1.width, y: 0 });
+    this.tweenLite.set(resizer, { x: rect1.width, y: 0 });
 
     const onResize = (x, y) => {
-      TweenLite.set(this.gridDraggable, {
+      this.tweenLite.set(this.gridDraggable, {
         width: x + 0,
         height: rect1.height - y,
       });
@@ -232,7 +239,7 @@ class ResizableDraggableGrid {
   }
 
   init() {
-    gsap.registerPlugin(Draggable);
+    this.gsap.registerPlugin(Draggable);
     this.renderOptionsForm();
   }
 
@@ -261,6 +268,12 @@ export default class extends PageModification {
 
   async apply(_, chartElement) {
     await this.waitForElement('.tick', this.chartElement);
+
+    if (extensionApiService.isFirefox()) {
+      // eslint-disable-next-line no-console
+      console.warn('jira-helper: AddChartGrid is not supported in Firefox');
+      return;
+    }
 
     const grid = new ResizableDraggableGrid(chartElement, this.addEventListener);
     grid.init();

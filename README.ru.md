@@ -1,10 +1,10 @@
 [![Build Status](https://travis-ci.com/pavelpower/jira-helper.svg?branch=master)](https://travis-ci.com/pavelpower/jira-helper)
 
-# Расширение для Google Chrome
+# Расширение для Google Chrome/Firefox
 
 ## Функционал расширения "jira-helper"
 
-_version 2.6.0_
+_version 2.18.2_
 
 - [Chart Bar - показывает количество задач в колоноках для кадой swimlane на доске](./docs/index.ru.md#swimline-chart-bar)
 - [Показывает красный флажок на панели задач](./docs/index.ru.md#flag-on-issue-panel)
@@ -92,6 +92,12 @@ npm run dev
 
 После этого добавиться плагин в Chrome.
 
+В Firefox:
+
+Открыть url - about:debugging#/runtime/this-firefox и нажать кнопку "загрузить временное дополнение".
+В открытом окне загрузки файлов нужно выбрать manifest.json из dist директории
+
+После этого добавиться плагин в Firefox.
 
 ### Во время разработки
 
@@ -122,6 +128,6 @@ npm run dev
 
 Версия релиза совпадает с версией приложения в [package.json](./package.json)
 
-Этот же номер версии будет соответсвовать номеру пубикуемого в ["Chrome WebStore"](https://chrome.google.com/webstore/detail/jira-helper/egmbomekcmpieccamghfgjgnlllgbgdl)
+Этот же номер версии будет соответствовать номеру публикуемого в ["Chrome WebStore"](https://chrome.google.com/webstore/detail/jira-helper/egmbomekcmpieccamghfgjgnlllgbgdl)
 
 _Может использоватся в Chrome [version >= 55](./src/manifest.json)_

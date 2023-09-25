@@ -2,7 +2,7 @@
 
 ## “jira-helper” features
 
-_version 2.6.0_
+_version 2.18.2_
 
 - [Chart Bar - showed count issues in columns for every swimlane on a board](./docs/index.md#swimline-chart-bar)
 - [showed a red-flag on the issue panel](./docs/index.md#flag-on-issue-panel)
@@ -82,6 +82,13 @@ Open the menu, choose “More tools”, then ["Extensions"](chrome://extensions/
 On the ["Extensions"](chrome://extensions/) page toggle “Developer mode”, press “Load unpacked” in the appeared menu.
 
 Choose the folder where the extension was built, `~/jira-helper/dist`.
+
+In Firefox:
+
+Open the url - about:debugging#/runtime/this-firefox and click "Load Temporary Add-on".
+In the open file upload window, select manifest.json from the dist directory
+
+After that, the plugin will be added to Firefox.
 
 
 ### During development
