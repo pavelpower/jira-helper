@@ -55,7 +55,7 @@ async function start() {
       WiplimitOnCellsSettings,
     ],
     [Routes.ISSUE]: [MarkFlaggedIssues, ToggleForRightSidebar],
-    [Routes.SEARCH]: [MarkFlaggedIssues, PrintCards],
+    [Routes.SEARCH]: [MarkFlaggedIssues, ToggleForRightSidebar, PrintCards],
     [Routes.REPORTS]: [AddSlaLine, AddChartGrid],
     [Routes.ALL]: [BugTemplate],
   };
