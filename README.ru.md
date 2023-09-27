@@ -4,7 +4,7 @@
 
 ## Функционал расширения "jira-helper"
 
-_version 2.18.2_
+_version 2.20.0_
 
 - [Chart Bar - показывает количество задач в колоноках для кадой swimlane на доске](./docs/index.ru.md#swimline-chart-bar)
 - [Показывает красный флажок на панели задач](./docs/index.ru.md#flag-on-issue-panel)

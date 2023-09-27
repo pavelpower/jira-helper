@@ -2,7 +2,7 @@
 
 ## “jira-helper” features
 
-_version 2.18.2_
+_version 2.20.0_
 
 - [Chart Bar - showed count issues in columns for every swimlane on a board](./docs/index.md#swimline-chart-bar)
 - [showed a red-flag on the issue panel](./docs/index.md#flag-on-issue-panel)
