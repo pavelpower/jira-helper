@@ -1,15 +1,17 @@
-const setBlurSensitive = isBlure => {
+import { extensionApiService } from '../shared/ExtensionApiService';
+
+const setBlurSensitive = isBlur => {
   const html = document.getElementsByTagName('html')[0];
-  if (isBlure) {
+  if (isBlur) {
     html.classList.add('blur');
     return;
   }
   html.classList.remove('blur');
 };
 
-const cnahgeBlureSensitive = isBlure => {
-  localStorage.setItem('blurSensitive', isBlure);
-  setBlurSensitive(isBlure);
+const changeBlurSensitive = isBlur => {
+  localStorage.setItem('blurSensitive', isBlur);
+  setBlurSensitive(isBlur);
 };
 
 export const setUpBlurSensitiveOnPage = () => {
@@ -18,13 +20,13 @@ export const setUpBlurSensitiveOnPage = () => {
 };
 
 export const initBlurSensitive = () => {
-  window.chrome.runtime.onMessage.addListener((request, sender) => {
+  extensionApiService.onMessage((request, sender) => {
     if (!sender.tab && Object.prototype.hasOwnProperty.call(request, 'blurSensitive')) {
-      cnahgeBlureSensitive(request.blurSensitive);
+      changeBlurSensitive(request.blurSensitive);
     }
   });
 
-  window.chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  extensionApiService.onMessage((request, sender, sendResponse) => {
     if (!sender.tab && Object.prototype.hasOwnProperty.call(request, 'getBlurSensitive')) {
       sendResponse({ blurSensitive: localStorage.getItem('blurSensitive') === 'true' });
     }

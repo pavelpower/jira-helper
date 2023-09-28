@@ -1,6 +1,16 @@
+/* global browser */
+
 class ExtensionApiService {
   constructor() {
     this.extensionAPI = window.chrome || window.browser;
+
+    if (!this.extensionAPI && typeof browser !== 'undefined') {
+      this.extensionAPI = browser;
+    }
+  }
+
+  isFirefox() {
+    return window.navigator.userAgent.includes('Firefox');
   }
 
   getUrl(resource) {
@@ -13,6 +23,18 @@ class ExtensionApiService {
 
   onTabsUpdated(cb) {
     return this.extensionAPI.tabs.onUpdated.addListener(cb);
+  }
+
+  onTabsActivated(cb) {
+    return this.extensionAPI.tabs.onActivated.addListener(cb);
+  }
+
+  tabsQuery(options, cb) {
+    return this.extensionAPI.tabs.query(options, cb);
+  }
+
+  tabsExecuteScript(tabId, details) {
+    return this.extensionAPI.tabs.executeScript(tabId, details);
   }
 
   sendMessageToTab(tabId, message) {
@@ -40,9 +62,17 @@ class ExtensionApiService {
   fetchStorageValueByKey(key) {
     return new Promise((resolve, reject) => {
       this.extensionAPI.storage.local.get([key], result =>
-        result[key] ? resolve(result[key]) : reject(Error('Not found the key in the storage of chrome browser'))
+        result[key] ? resolve(result[key]) : reject(Error('Not found the key in the storage of browser'))
       );
     });
+  }
+
+  createContextMenu(config) {
+    return this.extensionAPI.contextMenu.create(config);
+  }
+
+  removeAllContextMenus(cb) {
+    return this.extensionAPI.contextMenus.removeAll(cb);
   }
 }
 
