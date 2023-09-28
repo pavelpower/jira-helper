@@ -6,6 +6,11 @@ import { limitsKey, normalize } from '../shared';
 import { fieldLimitBlockTemplate, fieldLimitsTemplate, fieldLimitTitleTemplate } from './htmlTemplates';
 import { settingsJiraDOM as DOM } from '../../swimlane/constants';
 
+const TYPE_CALC = {
+  BY_CARD: 0,
+  BY_SUM_VALUE: 1,
+  BY_SUM_NUMBERS: 2,
+};
 export default class FieldLimitsSettingsPage extends PageModification {
   static jiraSelectors = {
     subnavTitle: '#subnav-title',
@@ -198,6 +203,17 @@ export default class FieldLimitsSettingsPage extends PageModification {
     return result ? 1 : 0;
   }
 
+  getSumNumberValueFromExtraField(exField) {
+    let result = 0;
+    if (exField.childNodes instanceof NodeList) {
+      exField.childNodes.forEach(el => {
+        const val = Number.parseFloat(el.innerText);
+        result += Number.isNaN(val) ? 0 : val;
+      });
+    }
+    return result;
+  }
+
   countAmountPersonalIssuesInColumn(column, stats, swimlaneId) {
     const { columnId } = column.dataset;
 
@@ -212,14 +228,33 @@ export default class FieldLimitsSettingsPage extends PageModification {
 
         const fieldNameSt = this.normalizedExtraFields.byId[stat.fieldId].name;
         const fieldValue = stat.fieldValue.replace(/^∑/, '');
-        const isSumValues = stat.fieldValue[0] === '∑';
+
+        let typeCalc = TYPE_CALC.BY_CARD;
+        if (stat.fieldValue[0] === '∑') {
+          typeCalc = TYPE_CALC.BY_SUM_VALUE;
+        }
+        if (/∑\([A-Za-z0-9]]*\)/gim.test(stat.fieldValue)) {
+          typeCalc = TYPE_CALC.BY_SUM_NUMBERS;
+        }
+        window.console.log('typeCalc:', typeCalc);
 
         for (const exField of extraFieldsForIssue) {
           const tooltipAttr = exField.getAttribute('data-tooltip');
           const fieldName = tooltipAttr.split(':')[0];
-          const countValues = isSumValues
-            ? this.getCountValuesFromExtraField(exField, fieldValue)
-            : this.getHasValueFromExtraField(exField, fieldValue);
+          let countValues;
+
+          switch (typeCalc) {
+            case TYPE_CALC.BY_SUM_VALUE:
+              countValues = this.getCountValuesFromExtraField(exField);
+              break;
+            case TYPE_CALC.BY_SUM_NUMBERS:
+              countValues = this.getSumNumberValueFromExtraField(exField, fieldValue);
+              break;
+            default:
+              // TYPE_CALC.BY_CARD
+              countValues = this.getHasValueFromExtraField(exField, fieldValue);
+              break;
+          }
 
           if (fieldName === fieldNameSt) {
             stats[fieldLimitKey].issues.push({
@@ -227,7 +262,7 @@ export default class FieldLimitsSettingsPage extends PageModification {
               countValues,
               issue,
             });
-            stats[fieldLimitKey].isSumValues = isSumValues;
+            stats[fieldLimitKey].typeCalc = typeCalc;
           }
         }
       });
