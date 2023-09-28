@@ -70,7 +70,11 @@ export const openPersonLimitsModal = async (modification, boardData, personLimit
   const modal = modification.insertHTML(document.body, 'beforeend', personLimitsModal);
 
   const columnsSelect = modal.querySelector('.columns select');
-  boardData.rapidListConfig.mappedColumns.forEach(({ id, name }) => {
+  boardData.rapidListConfig.mappedColumns.forEach(({ id, name, isKanPlanColumn }) => {
+    if (isKanPlanColumn) {
+      // for backlog kanban board
+      return;
+    }
     const option = document.createElement('option');
     option.text = name;
     option.value = id;

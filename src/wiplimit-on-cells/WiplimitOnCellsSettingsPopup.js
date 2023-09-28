@@ -33,7 +33,7 @@ export default class WipLimitOnCells extends PageModification {
 
     this.boardData = boardData;
     this.swimline = this.boardData?.swimlanesConfig?.swimlanes;
-    this.column = this.boardData?.rapidListConfig?.mappedColumns;
+    this.column = this.boardData?.rapidListConfig?.mappedColumns?.filter(i => !i.isKanPlanColumn);
     this.renderEditButton();
     this.onDOMChange('#columns', () => {
       this.renderEditButton();
