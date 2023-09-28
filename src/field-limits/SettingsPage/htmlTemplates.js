@@ -27,7 +27,7 @@ export const fieldLimitsTableTemplate = ({
           <tr>
             <td>
                <div class="field-group">
-                <label for="field-name">Field</label>
+                <label for="field-name" title="two related fields as one key" style="cursor: help;"><b>Field<sup>*</sup></b></label>
                 <select id="${selectFieldId}" class="select" name="field-name" defaultValue="${
   selectFieldOptions[0]?.value
 }">
@@ -40,7 +40,7 @@ export const fieldLimitsTableTemplate = ({
                 </select>
               </div>
               <div class="field-group">
-                <label for="field-value">Field Value</label>
+                <label for="field-value" title="two related fields as one key" style="cursor: help;"><b>Field Value<sup>*</sup></b></label>
                 <input id="${fieldValueInputId}" class="text medium-field" type="text" name="field-value" placeholder="Field Value">
               </div>
               <div class="field-group">

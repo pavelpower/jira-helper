@@ -72,10 +72,12 @@ export default class FieldLimitsSettingsPage extends PageModification {
     if (!boardData.canEdit) return;
 
     this.boardData = boardData;
+    this.columns = this.boardData?.rapidListConfig?.mappedColumns?.filter(i => !i.isKanPlanColumn);
+    this.swimlanes = this.boardData?.swimlanesConfig?.swimlanes;
 
     this.normalizedFields = normalize('fieldId', this.getCurrentFields());
-    this.normalizedSwimlanes = normalize('id', boardData.swimlanesConfig.swimlanes);
-    this.normalizedColumns = normalize('id', boardData.rapidListConfig.mappedColumns);
+    this.normalizedSwimlanes = normalize('id', this.swimlanes);
+    this.normalizedColumns = normalize('id', this.columns);
 
     this.settings = {
       limits: quickFilterSettings.limits || {},

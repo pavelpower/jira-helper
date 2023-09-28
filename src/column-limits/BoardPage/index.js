@@ -33,7 +33,7 @@ export default class extends PageModification {
   apply([editData = {}, boardGroups = {}, swimlanesSettings = {}]) {
     this.boardGroups = boardGroups;
     this.swimlanesSettings = swimlanesSettings;
-    this.mappedColumns = editData.rapidListConfig.mappedColumns;
+    this.mappedColumns = editData.rapidListConfig.mappedColumns.filter(({ isKanPlanColumn }) => !isKanPlanColumn);
     this.cssNotIssueSubTask = this.getCssSelectorNotIssueSubTask(editData);
 
     this.styleColumnHeaders();
