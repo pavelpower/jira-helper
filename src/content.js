@@ -12,6 +12,7 @@ import TetrisPlanningButton from './tetris-planning/TetrisPlanningButton';
 import TetrisPlanning from './tetris-planning/TetrisPlanning';
 import BugTemplate from './bug-template/BugTemplate';
 import MarkFlaggedIssues from './issue/MarkFlaggedIssues';
+import ToggleForRightSidebar from './issue/ToggleForRightSidebar';
 import FieldLimitsSettingsPage from './field-limits/SettingsPage';
 import FieldLimitsBoardPage from './field-limits/BoardPage';
 import PrintCards from './printcards/PrintCards';
@@ -53,8 +54,8 @@ async function start() {
       FieldLimitsSettingsPage,
       WiplimitOnCellsSettings,
     ],
-    [Routes.ISSUE]: [MarkFlaggedIssues],
-    [Routes.SEARCH]: [MarkFlaggedIssues, PrintCards],
+    [Routes.ISSUE]: [MarkFlaggedIssues, ToggleForRightSidebar],
+    [Routes.SEARCH]: [MarkFlaggedIssues, ToggleForRightSidebar, PrintCards],
     [Routes.REPORTS]: [AddSlaLine, AddChartGrid],
     [Routes.ALL]: [BugTemplate],
   };
