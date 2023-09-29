@@ -8,4 +8,6 @@ export const issueDOM = {
   linkButton: '[data-test-id="issue.issue-view.views.issue-base.foundation.quick-add.quick-add-item.link-issue"]',
   subIssueLink: '[data-test-id="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key"]',
   subIssueSummary: '[data-test-id="issue.issue-view.views.common.issue-line-card.issue-line-card-view.summary"]',
+  rightSidebar: '#viewissuesidebar',
+  rightOptionsBar: '[id="opsbar-jira.issue.tools"]',
 };

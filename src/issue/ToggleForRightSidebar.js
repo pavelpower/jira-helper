@@ -1,5 +1,6 @@
 import { PageModification } from '../shared/PageModification';
 import { getIssueId } from '../routing';
+import { issueDOM } from './domSelectors';
 
 const toggleMap = {
   false: { text: ' >> ', title: 'Collapse sidebar' },
@@ -7,7 +8,7 @@ const toggleMap = {
 };
 
 function changeHiddenSidebar(toggle) {
-  const sidebar = document.getElementById('viewissuesidebar');
+  const sidebar = document.querySelector(issueDOM.rightSidebar);
   if (sidebar) {
     sidebar.hidden = !sidebar.hidden;
     toggle.textContent = toggleMap[sidebar.hidden].text;
@@ -36,12 +37,12 @@ export default class extends PageModification {
   }
 
   waitForLoading() {
-    return this.waitForElement('#viewissuesidebar');
+    return Promise.all([this.waitForElement(issueDOM.rightSidebar), this.waitForElement(issueDOM.rightOptionsBar)]);
   }
 
   async apply() {
-    const opsNav = document.getElementById('opsbar-jira.issue.tools');
+    const opsBar = document.querySelector(issueDOM.rightOptionsBar);
     const toggle = getToggle(false);
-    opsNav.appendChild(toggle);
+    opsBar.appendChild(toggle);
   }
 }
