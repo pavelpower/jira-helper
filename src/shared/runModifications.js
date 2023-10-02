@@ -8,19 +8,33 @@ const applyModification = async (Modification, modificationInstance) => {
   const id = modificationInstance.getModificationId();
   currentModifications.set(Modification, { id, instance: modificationInstance });
 
-  await modificationInstance.preloadData();
-
-  const loadingPromise = modificationInstance.waitForLoading();
-  const dataPromise = modificationInstance.loadData();
-
-  const [loadingElement, data] = await Promise.all([loadingPromise, dataPromise]);
-
-  // if (loadingElement.dataset[Modification.name]) return;
-  // loadingElement.dataset[Modification.name] = true;
+  try {
+    await modificationInstance.preloadData();
+  } catch (err) {
+    window.console.error('jira-helper: Preload Data Filed:', err);
+  }
 
   const styles = modificationInstance.appendStyles();
   if (styles) document.body.insertAdjacentHTML('beforeend', styles);
-  modificationInstance.apply(data, loadingElement);
+
+  const loadingPromise = modificationInstance.waitForLoading();
+
+  try {
+    const dataPromise = modificationInstance.loadData();
+
+    const [loadingElement, data] = await Promise.all([loadingPromise, dataPromise]);
+
+    // if (loadingElement.dataset[Modification.name]) return;
+    // loadingElement.dataset[Modification.name] = true;
+    modificationInstance.apply(data, loadingElement);
+  } catch (err) {
+    window.console.error('jira-helper: Load Data Filed:', err);
+
+    // Run function apply after white load page, and without load data from server
+    loadingPromise.then(() => {
+      modificationInstance.apply();
+    });
+  }
 };
 
 const applyModifications = modificationsMap => {

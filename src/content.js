@@ -37,14 +37,14 @@ async function start() {
 
   const modificationsMap = {
     [Routes.BOARD]: [
-      WIPLimitsBoardPage,
       SwimlaneStats,
-      SwimlaneLimits,
-      TetrisPlanning,
-      MarkFlaggedIssues,
       PersonLimits,
+      WIPLimitsBoardPage,
+      SwimlaneLimits,
+      MarkFlaggedIssues,
       FieldLimitsBoardPage,
       WiplimitOnCells,
+      TetrisPlanning,
     ],
     [Routes.SETTINGS]: [
       SwimlaneSettingsPopup,

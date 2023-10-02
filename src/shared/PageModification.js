@@ -172,7 +172,7 @@ export class PageModification {
 
   // helpers
   getCssSelectorNotIssueSubTask(editData) {
-    const constraintType = editData.rapidListConfig.currentStatisticsField?.typeId ?? '';
+    const constraintType = editData?.rapidListConfig?.currentStatisticsField?.typeId ?? '';
     return constraintType === 'issueCountExclSubs' ? ':not(.ghx-issue-subtask)' : '';
   }
 

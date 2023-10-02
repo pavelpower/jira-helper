@@ -19,6 +19,8 @@ export default class extends PageModification {
   }
 
   loadData() {
+    // get the board settings to check whether subtasks need to be taken
+    // into account in the total amount or not
     return this.getBoardEditData();
   }
 
@@ -69,22 +71,22 @@ export default class extends PageModification {
 
   renderSwimlaneStats(header, headers, numberIssues, arrNumberIssues) {
     const stats = `
-  <div class="${style.wrapper}">
-    ${arrNumberIssues
-      .map((currentNumberIssues, index) => {
-        const title = `${headers[index]}: ${currentNumberIssues}`;
+    <div class="${style.wrapper}">
+      ${arrNumberIssues
+        .map((currentNumberIssues, index) => {
+          const title = `${headers[index]}: ${currentNumberIssues}`;
 
-        return `
-      <div title="${title}" class="${style.column}" style="background: ${currentNumberIssues ? '#999' : '#eee'}">
-        <div title="${title}" class="${style.bar}" style="height: ${toPx(
-          ((20 * currentNumberIssues) / numberIssues).toFixed(2)
-        )}"></div>
-      </div>
+          return `
+        <div title="${title}" class="${style.column}" style="background: ${currentNumberIssues ? '#999' : '#eee'}">
+          <div title="${title}" class="${style.bar}" style="height: ${toPx(
+            ((20 * currentNumberIssues) / numberIssues).toFixed(2)
+          )}"></div>
+        </div>
+      `;
+        })
+        .join('')}
+    </div>
     `;
-      })
-      .join('')}
-  </div>
-  `;
 
     header.classList.add(style.header);
     this.insertHTML(header, 'afterbegin', stats);

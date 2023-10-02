@@ -236,7 +236,6 @@ export default class FieldLimitsSettingsPage extends PageModification {
         if (/∑\([A-Za-z0-9]]*\)/gim.test(stat.fieldValue)) {
           typeCalc = TYPE_CALC.BY_SUM_NUMBERS;
         }
-        window.console.log('typeCalc:', typeCalc);
 
         for (const exField of extraFieldsForIssue) {
           const tooltipAttr = exField.getAttribute('data-tooltip');
