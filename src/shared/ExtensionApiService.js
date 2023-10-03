@@ -37,8 +37,11 @@ class ExtensionApiService {
     return this.extensionAPI.tabs.executeScript(tabId, details);
   }
 
-  sendMessageToTab(tabId, message) {
-    return this.extensionAPI.tabs.sendMessage(tabId, message);
+  sendMessageToTab(tabId, message, response) {
+    if (this.isFirefox()) {
+      return this.extensionAPI.tabs.sendMessage(tabId, message).then(response);
+    }
+    return this.extensionAPI.tabs.sendMessage(tabId, message, response);
   }
 
   reload() {
@@ -68,7 +71,7 @@ class ExtensionApiService {
   }
 
   createContextMenu(config) {
-    return this.extensionAPI.contextMenu.create(config);
+    return this.extensionAPI.contextMenus.create(config);
   }
 
   removeAllContextMenus(cb) {

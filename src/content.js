@@ -23,6 +23,7 @@ import WiplimitOnCells from './wiplimit-on-cells/WipLimitOnCells';
 import WiplimitOnCellsSettings from './wiplimit-on-cells/WiplimitOnCellsSettingsPopup';
 
 const domLoaded = () =>
+  // eslint-disable-next-line consistent-return
   new Promise(resolve => {
     if (document.readyState === 'interactive' || document.readyState === 'complete') return resolve();
     window.addEventListener('DOMContentLoaded', resolve);
