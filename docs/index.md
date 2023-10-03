@@ -80,26 +80,6 @@ _"Board Settings (Scrum board) -> Estimates"_ Only the Board Administrator can s
 
 ![tetris planning](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_tetris_planning.gif)
 
-
-## Printing Multiple Stickers
-
-This feature allows you to print lots of stickers using your office printer.
-
-![how to use printing](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_jql_print.gif)
-
-Use the [template](chrome-extension://egmbomekcmpieccamghfgjgnlllgbgdl/options.html) to print post-its on an ordinary A4 paper sheet.
-
-![template for stickers](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_jql_print_template.gif)
-
-The print template uses
-* [GOST A](https://ffont.ru/font/gost-type-a) and [GOST B](https://ffont.ru/font/gost-type-b) fonts
-* a specific way of displaying the issue number at the bottom of the post-it
-* color coding of the associated Epic (in the example below, the Epic name is “Песни”)
-
-This lets you conveniently use the post-its like this
-![sample position a stickers on a desck](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_jql_print_stiker_position_on_desk_w600.png)
-
-
 ## WIP-limits for several columns (CONWIP)
 _WIP – work in progress_
 

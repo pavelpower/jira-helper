@@ -24,7 +24,6 @@
         "default_title": "Jira Helper"
     },
     "background": {
-        "printCardSettings": "background.js",
         "contextMenu": "contextMenu.js"
     },
     "web_accessible_resources": [

@@ -13,8 +13,6 @@ module.exports = {
   entry: {
     content: ['./src/content.js'], // TODO fix AutoRefreshPlugin to work without []
     index: './src/popup/chromePlugin.js',
-    printcardDialog: './src/printcards/printcardsDialog/printcardsDialog.js',
-    printcards: './src/printcards/cardsRender/printcards.js',
     background: './src/background/background.js',
     // blureforsensitive: './src/blure-for-sensitive/blurSensitive.js',
     contextMenu: './src/contextMenu.js',
@@ -60,11 +58,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new CopyWebpackPlugin([
-      { from: './src/printcards/img/**/*', to: './img', flatten: true },
       { from: './src/issue/img/**/*', to: './img', flatten: true },
       { from: './src/assets/**/*', to: './src', flatten: true },
-      { from: './src/printcards/printcardsDialog/static/**/*', to: './printcards_static', flatten: true },
-      { from: './src/printcards/cardsRender/fonts/**/*', to: './fonts', flatten: true },
       { from: './src/manifest.json', to: './' },
       { from: './src/person-limits/nativeModalScript.js', to: './' },
       { from: './src/blur-for-sensitive/blurSensitive.css', to: './src', flatten: true },
@@ -80,25 +75,11 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
-      filename: 'printcardsDialog.html',
-      title: 'Print Card',
-      template: path.resolve(__dirname, '../src/printcards/printcardsDialog/printcardsDialog.html'),
-      inject: 'head',
-      chunks: ['printcardsDialog'],
-    }),
-    new HtmlWebpackPlugin({
       filename: 'background.html',
       title: 'background',
       template: path.resolve(__dirname, '../src/background/background.html'),
       inject: 'head',
       chunks: ['background'],
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'printcards.html',
-      title: 'printcards',
-      template: path.resolve(__dirname, '../src/printcards/cardsRender/printcards.html'),
-      inject: 'head',
-      chunks: ['printcards'],
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
