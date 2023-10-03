@@ -21,12 +21,21 @@ const createContextMenu = tabId => {
   });
 };
 
-extensionApiService.onTabsUpdated((tabId, changeInfo) => {
-  if (changeInfo.status === 'complete') {
-    createContextMenu(tabId);
+// eslint-disable-next-line func-names
+extensionApiService.tabsQuery({ active: true, currentWindow: true }, function(tabs) {
+  const tab = tabs[0];
+  // Board JIRA
+  if (!/rapidView=(\d*)/im.test(tab.url)) {
+    return;
   }
-});
 
-extensionApiService.onTabsActivated(activeInfo => {
-  createContextMenu(activeInfo.tabId);
+  extensionApiService.onTabsUpdated((tabId, changeInfo) => {
+    if (changeInfo.status === 'complete') {
+      createContextMenu(tabId);
+    }
+  });
+
+  extensionApiService.onTabsActivated(activeInfo => {
+    createContextMenu(activeInfo.tabId);
+  });
 });

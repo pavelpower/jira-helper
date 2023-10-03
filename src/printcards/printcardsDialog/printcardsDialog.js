@@ -20,7 +20,7 @@ window.onload = () =>
     function initBtnPrint() {
       const printBtn = document.querySelector('#print_template_btn');
       printBtn.onclick = () => {
-        printPdf('/options_static/jira_stickers_template.pdf');
+        printPdf('/printcards_static/jira_stickers_template.pdf');
       };
     }
 

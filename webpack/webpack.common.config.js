@@ -13,11 +13,12 @@ module.exports = {
   entry: {
     content: ['./src/content.js'], // TODO fix AutoRefreshPlugin to work without []
     index: './src/popup/chromePlugin.js',
-    options: './src/options/options.js',
-    background: './src/background/background.js',
+    printcardDialog: './src/printcards/printcardsDialog/printcardsDialog.js',
     printcards: './src/printcards/cardsRender/printcards.js',
+    background: './src/background/background.js',
     // blureforsensitive: './src/blure-for-sensitive/blurSensitive.js',
     contextMenu: './src/contextMenu.js',
+    tetrisPlanningOpenModal: './src/tetris-planning/openModal.js',
   },
   output: {
     filename: '[name].js',
@@ -62,10 +63,9 @@ module.exports = {
       { from: './src/printcards/img/**/*', to: './img', flatten: true },
       { from: './src/issue/img/**/*', to: './img', flatten: true },
       { from: './src/assets/**/*', to: './src', flatten: true },
-      { from: './src/options/static/**/*', to: './options_static', flatten: true },
+      { from: './src/printcards/printcardsDialog/static/**/*', to: './printcards_static', flatten: true },
       { from: './src/printcards/cardsRender/fonts/**/*', to: './fonts', flatten: true },
       { from: './src/manifest.json', to: './' },
-      { from: './src/tetris-planning/openModal.js', to: './' },
       { from: './src/person-limits/nativeModalScript.js', to: './' },
       { from: './src/blur-for-sensitive/blurSensitive.css', to: './src', flatten: true },
     ]),
@@ -80,11 +80,11 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
-      filename: 'options.html',
-      title: 'options',
-      template: path.resolve(__dirname, '../src/options/options.html'),
+      filename: 'printcardsDialog.html',
+      title: 'Print Card',
+      template: path.resolve(__dirname, '../src/printcards/printcardsDialog/printcardsDialog.html'),
       inject: 'head',
-      chunks: ['options'],
+      chunks: ['printcardsDialog'],
     }),
     new HtmlWebpackPlugin({
       filename: 'background.html',
