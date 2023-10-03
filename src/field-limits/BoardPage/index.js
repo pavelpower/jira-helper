@@ -230,6 +230,7 @@ export default class FieldLimitsSettingsPage extends PageModification {
         const fieldValue = stat.fieldValue.replace(/^∑/, '');
 
         let typeCalc = TYPE_CALC.BY_CARD;
+        window.console.info('countAmountPersonalIssuesInColumn:', stat.fieldValue);
         if (stat.fieldValue[0] === '∑') {
           typeCalc = TYPE_CALC.BY_SUM_VALUE;
         }
@@ -244,10 +245,10 @@ export default class FieldLimitsSettingsPage extends PageModification {
 
           switch (typeCalc) {
             case TYPE_CALC.BY_SUM_VALUE:
-              countValues = this.getCountValuesFromExtraField(exField);
+              countValues = this.getCountValuesFromExtraField(exField, fieldValue);
               break;
             case TYPE_CALC.BY_SUM_NUMBERS:
-              countValues = this.getSumNumberValueFromExtraField(exField, fieldValue);
+              countValues = this.getSumNumberValueFromExtraField(exField);
               break;
             default:
               // TYPE_CALC.BY_CARD
