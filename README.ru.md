@@ -6,7 +6,7 @@
 
 _version 2.20.0_
 
-- [Chart Bar - показывает количество задач в колоноках для кадой swimlane на доске](./docs/index.ru.md#swimline-chart-bar)
+- [Chart Bar - показывает количество задач в колоноках для кадой swimlane на доске](./docs/index.ru.md#swimlane-chart-bar)
 - [Показывает красный флажок на панели задач](./docs/index.ru.md#flag-on-issue-panel)
 - [Тетрис-планирование для Scrum backlog](./docs/index.ru.md#tetris-planning-for-scrum)
 - [Печать множества стикеров 76x76mm на обычном лазерном принтере](./docs/index.ru.md#printing-many-stickers)

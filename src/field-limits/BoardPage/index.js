@@ -160,14 +160,14 @@ export default class FieldLimitsSettingsPage extends PageModification {
     });
   }
 
-  hasCustomSwimlines() {
-    const someSwimline = document.querySelector(DOM.swimlaneHeaderContainer);
+  hasCustomswimlanes() {
+    const someswimlane = document.querySelector(DOM.swimlaneHeaderContainer);
 
-    if (someSwimline == null) {
+    if (someswimlane == null) {
       return false;
     }
 
-    return someSwimline.getAttribute('aria-label').indexOf('custom:') !== -1;
+    return someswimlane.getAttribute('aria-label').indexOf('custom:') !== -1;
   }
 
   // Pro, Pro^2
@@ -275,7 +275,7 @@ export default class FieldLimitsSettingsPage extends PageModification {
       issues: [],
     }))(this.fieldLimits.limits);
 
-    if (this.hasCustomSwimlines()) {
+    if (this.hasCustomswimlanes()) {
       document.querySelectorAll(DOM.swimlane).forEach(swimlane => {
         const swimlaneId = swimlane.getAttribute('swimlane-id');
 

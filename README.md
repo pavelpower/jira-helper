@@ -4,7 +4,7 @@
 
 _version 2.20.0_
 
-- [Chart Bar - showed count issues in columns for every swimlane on a board](./docs/index.md#swimline-chart-bar)
+- [Chart Bar - showed count issues in columns for every swimlane on a board](./docs/index.md#swimlane-chart-bar)
 - [showed a red-flag on the issue panel](./docs/index.md#flag-on-issue-panel)
 - [Tetris-planning for the Scrum backlog](./docs/index.md#tetris-planning-for-scrum)
 - [Printing stickers 76x76мм on a usual laser printer by the set many issues of JIRA](./docs/index.md#printing-many-stickers)

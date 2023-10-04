@@ -10,7 +10,7 @@ export default class WipLimitOnCells extends PageModification {
   };
 
   static jiraSelectors = {
-    panelConfig: '#jh-group-of-btns-setting-page',
+    panelConfig: `#${btnGroupIdForColumnsSettingsPage}`,
   };
 
   getModificationId() {
@@ -18,6 +18,7 @@ export default class WipLimitOnCells extends PageModification {
   }
 
   waitForLoading() {
+    // after button column button
     return Promise.all([this.waitForElement(WipLimitOnCells.jiraSelectors.panelConfig)]);
   }
 
@@ -28,23 +29,38 @@ export default class WipLimitOnCells extends PageModification {
     ]);
   }
 
-  apply([boardData, settings]) {
+  apply([boardData, [settings]]) {
     if (!(boardData && boardData.canEdit)) return;
 
     this.boardData = boardData;
-    this.swimline = this.boardData?.swimlanesConfig?.swimlanes;
+    // swimlines - this error in word may be save this variant;
+    this.swimlane = this.boardData?.swimlanesConfig?.swimlanes;
     this.column = this.boardData?.rapidListConfig?.mappedColumns?.filter(i => !i.isKanPlanColumn);
     this.renderEditButton();
     this.onDOMChange('#columns', () => {
       this.renderEditButton();
     });
 
-    [this.data] = settings;
+    // TODO: with fixed error saved settings name "swimline" => "swimlane"
+    settings = settings.map(limit => {
+      const cells = [];
+      limit.cells.forEach(cell => {
+        cells.push({
+          column: cell.column,
+          showBadge: cell.showBadge,
+          swimlane: cell.swimlane ?? cell.swimline,
+        });
+      });
+      limit.cells = cells;
+      return limit;
+    });
+
+    this.data = settings;
     const handleGetNameLabel = (swimlaneId, columnid) => {
-      const swimline = this.swimline.find(element => element.id.toString() === swimlaneId.toString());
+      const swimlane = this.swimlane.find(element => element.id.toString() === swimlaneId.toString());
       const column = this.column.find(element => element.id.toString() === columnid.toString());
 
-      return `${swimline?.name} / ${column?.name}`;
+      return `${swimlane?.name} / ${column?.name}`;
     };
     this.table = new TableRangeWipLimit({ data: this.data, handleGetNameLabel });
   }
@@ -83,7 +99,7 @@ export default class WipLimitOnCells extends PageModification {
     await this.popup.render();
 
     await this.popup.appendToContent(RangeName());
-    await this.popup.appendToContent(cellsAdd(this.swimline, this.column));
+    await this.popup.appendToContent(cellsAdd(this.swimlane, this.column));
     await this.popup.appendToContent(`<div id=${settingsJiraDOM.table}></div>`);
 
     await this.popup.appendToContent(ClearDataButton(settingsJiraDOM.ClearData));
@@ -115,18 +131,18 @@ export default class WipLimitOnCells extends PageModification {
 
   handleOnClickAddRange = () => {
     const { value: name, dataset } = document.getElementById(settingsJiraDOM.inputRange);
-    const { value: swimline } = document.getElementById(`${settingsJiraDOM.swimlineSelect}`).selectedOptions[0];
+    const { value: swimlane } = document.getElementById(`${settingsJiraDOM.swimlaneSelect}`).selectedOptions[0];
     const { value: column } = document.getElementById(`${settingsJiraDOM.columnSelect}`).selectedOptions[0];
     const { checked: showBadge } = document.getElementById(`${settingsJiraDOM.showBadge}`);
 
-    if (swimline === '-' || column === '-') {
-      alert('need choose swimline and column and try again.');
+    if (swimlane === '-' || column === '-') {
+      alert('need choose swimlane and column and try again.');
       return;
     }
 
     if (dataset.range && this.table.findRange(dataset.range)) {
       const cells = {
-        swimline,
+        swimlane,
         column,
         showBadge,
       };
@@ -135,7 +151,7 @@ export default class WipLimitOnCells extends PageModification {
       const addRangeResult = this.table.addRange(name);
       if (addRangeResult) {
         const cells = {
-          swimline,
+          swimlane,
           column,
           showBadge,
         };

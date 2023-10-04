@@ -2,12 +2,12 @@
 
 [eng](./index.md)
 
-## Swimline Chart Bar
+## swimlane Chart Bar
 
 Работает в заголовках Swimlane.
 
 При наведении курсора мыши на bar всплывает подсказка (title) в которой показывается название
-ассоциированной колонки доски с bar и количество задач в этой колонке для этого swimline.
+ассоциированной колонки доски с bar и количество задач в этой колонке для этого swimlane.
 
 ![Chart Bar](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_ChartBar.gif)
 
@@ -139,7 +139,7 @@ _"Board Settings -> Swimlane"_
 
 Вы можете установить WIP-limit на человека если войдете в настройки колонок на доске.
 
-При этом, вы можете указать в каких колонках и swimline учитывать какой вам нужно WIP-лимит на человека.
+При этом, вы можете указать в каких колонках и swimlane учитывать какой вам нужно WIP-лимит на человека.
 
 
 ## WIP-limit for Field Value
@@ -210,7 +210,7 @@ _"Board Settings -> Swimlane"_
 * `Visual Name` = `To Do`
 * `WIP Limit` = `10`
 * `Columns` = `Planned`
-* `Swimline` — выбрать все
+* `swimlane` — выбрать все
 
 А второе будет с настройками
 * `Field` = `Story Points`
@@ -218,7 +218,7 @@ _"Board Settings -> Swimlane"_
 * `Visual Name` = `In Progress`
 * `WIP Limit` = `5`
 * `Columns` = `In Progress`
-* `Swimline` — выбрать все
+* `swimlane` — выбрать все
 
 Значение `Field Value` указанное как `∑(`<любая буква>`)` — подсказывает, что надо суммировать
 числовые значения для jira-helper. А буквы нужно ставить разные, потому, что значение поля это часть 
