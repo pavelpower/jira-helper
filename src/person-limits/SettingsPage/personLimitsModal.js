@@ -1,7 +1,7 @@
-import personLimitsModal from './personLimitsModal.html';
-import { extensionApiService } from '../shared/ExtensionApiService';
-import { getUser } from '../shared/jiraApi';
-import { BOARD_PROPERTIES } from '../shared/constants';
+import personLimitsModal from './htmlTemplates';
+import { extensionApiService } from '../../shared/ExtensionApiService';
+import { getUser } from '../../shared/jiraApi';
+import { BOARD_PROPERTIES } from '../../shared/constants';
 
 const renderRow = ({ id, person, limit, columns, swimlanes }, deleteLimit, onEdit) => {
   document.querySelector('#persons-limit-body').insertAdjacentHTML(
@@ -203,7 +203,18 @@ export const openPersonLimitsModal = async (modification, boardData, personLimit
   personLimits.limits.forEach(personLimit => renderRow(personLimit, deleteLimit, onEdit));
 
   //  window.AJS is not available here
-  const script = document.createElement('script');
-  script.setAttribute('src', extensionApiService.getUrl('nativeModalScript.js'));
-  document.body.appendChild(script);
+  // eslint-disable-next-line func-names
+  extensionApiService.tabsQuery({ active: true, currentWindow: true }, function(tabs) {
+    const tab = tabs[0];
+    // Board JIRA
+    if (!/rapidView=(\d*)/im.test(tab.url)) {
+      return;
+    }
+    extensionApiService.tabsExecuteScript({
+      target: {
+        tabId: tab.id,
+      },
+      files: ['nativeModalScript.js'],
+    });
+  });
 };

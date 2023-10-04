@@ -1,6 +1,6 @@
-import { PageModification } from '../shared/PageModification';
-import { BOARD_PROPERTIES } from '../shared/constants';
-import { settingsJiraDOM as DOM } from '../swimlane/constants';
+import { PageModification } from '../../shared/PageModification';
+import { BOARD_PROPERTIES } from '../../shared/constants';
+import { settingsJiraDOM as DOM } from '../../swimlane/constants';
 
 const isPersonLimitAppliedToIssue = (personLimit, assignee, columnId, swimlaneId) => {
   if (swimlaneId == null) {
@@ -214,8 +214,8 @@ export default class extends PageModification {
   }
 
   showOrHideEmptySwimlanes() {
-    const swimLines = Array.from(document.querySelectorAll(DOM.swimlane));
-    swimLines.forEach(el => {
+    const swimlanes = Array.from(document.querySelectorAll(DOM.swimlane));
+    swimlanes.forEach(el => {
       this.showOrHideElementByVisibleIssueCards(el);
     });
   }
@@ -231,15 +231,15 @@ export default class extends PageModification {
     }
   }
 
-  hasCustomSwimlines() {
-    const someSwimline = document.querySelector(DOM.swimlaneHeaderContainer);
+  hasCustomswimlanes() {
+    const someswimlane = document.querySelector(DOM.swimlaneHeaderContainer);
 
-    if (someSwimline == null) {
+    if (someswimlane == null) {
       return false;
     }
 
     // TODO: Shouldn't work for any other language except English, so we have to think about it. F.e., in Russian, it is "Дорожка для custom"
-    return someSwimline.getAttribute('aria-label').indexOf('Swimlane for custom') !== -1;
+    return someswimlane.getAttribute('aria-label').indexOf('Swimlane for custom') !== -1;
   }
 
   countAmountPersonalIssuesInColumn(column, stats, swimlaneId) {
@@ -265,7 +265,7 @@ export default class extends PageModification {
       issues: [],
     }));
 
-    if (this.hasCustomSwimlines()) {
+    if (this.hasCustomswimlanes()) {
       document.querySelectorAll(DOM.swimlane).forEach(swimlane => {
         const swimlaneId = swimlane.getAttribute('swimlane-id');
 
