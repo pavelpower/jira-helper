@@ -3,7 +3,6 @@ export const BOARD_PROPERTIES = {
   SWIMLANE_SETTINGS: 'jiraHelperSwimlaneSettings',
   OLD_SWIMLANE_SETTINGS: 'jiraHelperWIPLimits',
   SLA_CONFIG: 'slaConfig3',
-  TETRIS_PLANNING: 'settingTetrisPlaning',
   PERSON_LIMITS: 'personLimitsSettings',
   FIELD_LIMITS: 'fieldLimitsJH',
   WIP_LIMITS_CELLS: 'wipLimitCells',

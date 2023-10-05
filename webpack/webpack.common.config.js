@@ -16,7 +16,6 @@ module.exports = {
     background: './src/background/background.js',
     // blureforsensitive: './src/blure-for-sensitive/blurSensitive.js',
     contextMenu: './src/contextMenu.js',
-    tetrisPlanningOpenModal: './src/tetris-planning/openModal.js',
   },
   output: {
     filename: '[name].js',

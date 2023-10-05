@@ -8,8 +8,6 @@ import SwimlaneLimits from './swimlane/SwimlaneLimits';
 import SwimlaneSettingsPopup from './swimlane/SwimlaneSettingsPopup';
 import WIPLimitsSettingsPage from './column-limits/SettingsPage';
 import WIPLimitsBoardPage from './column-limits/BoardPage';
-import TetrisPlanningButton from './tetris-planning/TetrisPlanningButton';
-import TetrisPlanning from './tetris-planning/TetrisPlanning';
 import BugTemplate from './bug-template/BugTemplate';
 import MarkFlaggedIssues from './issue/MarkFlaggedIssues';
 import ToggleForRightSidebar from './issue/ToggleForRightSidebar';
@@ -44,13 +42,11 @@ async function start() {
       MarkFlaggedIssues,
       FieldLimitsBoardPage,
       WiplimitOnCells,
-      TetrisPlanning,
     ],
     [Routes.SETTINGS]: [
       SwimlaneSettingsPopup,
       WIPLimitsSettingsPage,
       PersonLimitsSettings,
-      TetrisPlanningButton,
       FieldLimitsSettingsPage,
       WiplimitOnCellsSettings,
     ],

@@ -36,50 +36,6 @@ Use them to create a Template for this issue type. It’s stored locally in your
 
 ![description template](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_description_template.gif)
 
-
-## Scrum Tetris-planning
-
-Tetris-planning allows you to specify separate size measures for different specialists on your team.
-
->When your team has programmers and testers doing work strictly according to their job titles, maintaining a joint estimation might get tricky.
->
->This happens, because different specialists don’t usually understand each other that well.
->
->Tetris-planning approach can be used to overcome that.
->
->The approach itself was popularised by Max Dorofeev in [one of his speeches](https://www.youtube.com/watch?v=fsqXlW_m0Bo&t=1365s)
->
->However, there are critics of this approach [here](https://www.youtube.com/watch?v=NPIKAvjuJXc)
-
-When using JIRA Scrum-boards you can add issues to the Sprint backlog.
-
-By default, JIRA only allows you to use one estimation value, i.e. Story Points.
-
-This way, the Sprint header will show three sums: not started issues (_gray_), in progress issues (_blue_), done issues (_green_).
-
-![sprint head with story points](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_sprinthead_with_storypoints.png)
-
-**Jira-helper** adds a feature to use several values to visualize estimations.
-
-It doesn’t matter, whether they are Story Points or any other integer value.
-
-Now, Scrum Sprint backlog headers will display chosen values for the chosen parameters.
-
-They are displayed like this: `param name: (sum of this parameter estimations in the sprint)/(max sum of this estimate)`
-
-Where:
-- `param name` is the name of the parameter used for estimation
-- `sum of this parameter estimations in the sprint` is all this Sprint’s estimates by this parameter summed up
-- `max sum of this estimate` is the maximum possible value for this parameter for this Sprint
-
-If `sum of this estimate in the sprint` is greater than `max sum of this estimate`, the tag will appear red to show that you shouldn’t add more tasks for this estimation parameter.
-
-Otherwise, the tag will appear green.
-
-_"Board Settings (Scrum board) -> Estimates"_ Only the Board Administrator can save this setting.
-
-![tetris planning](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_tetris_planning.gif)
-
 ## WIP-limits for several columns (CONWIP)
 _WIP – work in progress_
 
