@@ -51,10 +51,7 @@ export default class PersonalWIPLimit extends PageModification {
     this.DOMeditBtn = this.insertHTML(
       document.getElementById(btnGroupIdForColumnsSettingsPage),
       'beforeend',
-      groupSettingsBtnTemplate({
-        openEditorBtn: settingsJiraDOM.openEditorButton,
-        groupOfBtnsId: btnGroupIdForColumnsSettingsPage,
-      })
+      groupSettingsBtnTemplate()
     );
 
     this.popup = new Popup({
@@ -166,13 +163,11 @@ export default class PersonalWIPLimit extends PageModification {
   };
 
   onDeleteLimit = async id => {
-    window.console.log('deleteLimit:', id);
     this.personLimits.limits = this.personLimits.limits.filter(limit => limit.id !== id);
     await this.updateBoardProperty(BOARD_PROPERTIES.PERSON_LIMITS, this.personLimits);
   };
 
   onEdit = async id => {
-    window.console.log('onEdit:', id);
     const personalWIPLimit = this.personLimits.limits.find(limit => limit.id === id);
 
     document.getElementById(settingsJiraDOM.idLimit).value = personalWIPLimit.limit;

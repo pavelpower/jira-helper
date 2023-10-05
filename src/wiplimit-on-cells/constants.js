@@ -9,10 +9,11 @@ export const settingsJiraDOM = {
   disableRange: 'WIP_disableRange',
   buttonRange: 'WIP_buttonRange',
   chooseCheckbox: 'WIP_chooseCheckbox',
+  editLimitsBtn: 'edit-WipLimitOnCells-btn-jh',
 };
 
-export const settingsEditWipLimitOnCells = btnId => `
-            <button id="${btnId}" class="aui-button" type="button">Edit Wip limits by cells</button>
+export const settingsEditWipLimitOnCells = () => `
+            <button id="${settingsJiraDOM.editLimitsBtn}" class="aui-button" type="button">Edit Wip limits by cells</button>
         `;
 
 export const ClearDataButton = btnId => `<div style="margin-top: 1rem">

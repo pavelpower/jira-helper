@@ -1,20 +1,21 @@
 import { PageModification } from '../shared/PageModification';
 import { BOARD_PROPERTIES, btnGroupIdForColumnsSettingsPage } from '../shared/constants';
+import { getSettingsTab } from '../routing';
 import { Popup } from '../shared/getPopup';
 import { cellsAdd, ClearDataButton, RangeName, settingsEditWipLimitOnCells, settingsJiraDOM } from './constants';
 import { TableRangeWipLimit } from './table';
 
 export default class WipLimitOnCells extends PageModification {
-  static ids = {
-    editLimitsBtn: 'edit-WipLimitOnCells-btn-jh',
-  };
-
   static jiraSelectors = {
     panelConfig: `#${btnGroupIdForColumnsSettingsPage}`,
   };
 
   getModificationId() {
     return `WipLimitByCells-settings-${this.getBoardId()}`;
+  }
+
+  async shouldApply() {
+    return (await getSettingsTab()) === 'columns';
   }
 
   waitForLoading() {
@@ -82,7 +83,7 @@ export default class WipLimitOnCells extends PageModification {
     const editBtn = this.insertHTML(
       document.getElementById(btnGroupIdForColumnsSettingsPage),
       'beforeend',
-      settingsEditWipLimitOnCells(WipLimitOnCells.ids.editLimitsBtn)
+      settingsEditWipLimitOnCells()
     );
 
     this.popup = new Popup({
