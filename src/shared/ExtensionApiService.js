@@ -1,8 +1,10 @@
-/* global browser */
+/* global browser chrome navigator */
 
 class ExtensionApiService {
   constructor() {
-    this.extensionAPI = window.chrome || window.browser;
+    if (typeof chrome !== 'undefined') {
+      this.extensionAPI = chrome;
+    }
 
     if (!this.extensionAPI && typeof browser !== 'undefined') {
       this.extensionAPI = browser;
@@ -10,7 +12,7 @@ class ExtensionApiService {
   }
 
   isFirefox() {
-    return window.navigator.userAgent.includes('Firefox');
+    return navigator.userAgent.includes('Firefox');
   }
 
   getUrl(resource) {
@@ -31,6 +33,15 @@ class ExtensionApiService {
 
   tabsQuery(options, cb) {
     return this.extensionAPI.tabs.query(options, cb);
+  }
+
+  getTab(tabId) {
+    return this.extensionAPI.tabs.get(tabId);
+  }
+
+  async checkTabURLByPattern(tabId, regexp) {
+    const tab = await this.extensionAPI.tabs.get(tabId);
+    return regexp.test(tab.url);
   }
 
   tabsExecuteScript(tabId, details) {
@@ -70,12 +81,16 @@ class ExtensionApiService {
     });
   }
 
-  createContextMenu(config) {
-    return this.extensionAPI.contextMenus.create(config);
-  }
-
   removeAllContextMenus(cb) {
     return this.extensionAPI.contextMenus.removeAll(cb);
+  }
+
+  addContextMenuListener(cb) {
+    return this.extensionAPI.contextMenus.onClicked.addListener(cb);
+  }
+
+  createContextMenu(config) {
+    return this.extensionAPI.contextMenus.create(config);
   }
 }
 
