@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const pcg = require('../package.json');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const version = process.env.PACKAGE_VERSION || pcg.version;
 
@@ -12,10 +11,8 @@ module.exports = {
   stats: 'errors-only',
   entry: {
     content: ['./src/content.js'], // TODO fix AutoRefreshPlugin to work without []
-    index: './src/popup/chromePlugin.js',
     background: './src/background/background.js',
     // blureforsensitive: './src/blure-for-sensitive/blurSensitive.js',
-    contextMenu: './src/contextMenu.js',
   },
   output: {
     filename: '[name].js',
@@ -63,23 +60,6 @@ module.exports = {
       { from: './src/person-limits/nativeModalScript.js', to: './' },
       { from: './src/blur-for-sensitive/blurSensitive.css', to: './src', flatten: true },
     ]),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      title: 'jira-helper',
-      template: path.resolve(__dirname, '../src/popup/chromePlugin.html'),
-      inject: 'head',
-      files: {
-        js: ['chromePlugin.js'],
-        css: ['chromePlugin.css'],
-      },
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'background.html',
-      title: 'background',
-      template: path.resolve(__dirname, '../src/background/background.html'),
-      inject: 'head',
-      chunks: ['background'],
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.PACKAGE_VERSION': JSON.stringify(version),

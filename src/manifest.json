@@ -24,7 +24,8 @@
         "default_title": "Jira Helper"
     },
     "background": {
-        "contextMenu": "contextMenu.js"
+        "service_worker": "background.js",
+        "type": "module"
     },
     "web_accessible_resources": [
         {
@@ -54,7 +55,8 @@
         "activeTab",
         "storage",
         "tabs",
-        "contextMenus"
+        "contextMenus",
+        "debugger"
     ],
     "host_permissions": ["http://*/*", "https://*/*"]
 }

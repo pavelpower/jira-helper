@@ -1,55 +1,53 @@
 import { types } from './actions';
 import { extensionApiService } from '../shared/ExtensionApiService';
 
-const state = {
-  jiraCards: {
-    issues: null,
-    epics: null,
-    specialFields: {},
-  },
-  roles: {},
+const regexpBoardUrl = /rapidView=(\d*)/im;
+
+// FOR ROATING
+extensionApiService.onTabsUpdated((tabId, changeInfo) => {
+  if (changeInfo.url) {
+    extensionApiService.sendMessageToTab(tabId, {
+      type: types.TAB_URL_CHANGE,
+      url: changeInfo.url,
+    });
+  }
+});
+
+extensionApiService.addContextMenuListener(async (info, tab) => {
+  const isScope = await extensionApiService.checkTabURLByPattern(tab.id, regexpBoardUrl);
+  if (isScope) {
+    extensionApiService.sendMessageToTab(tab.id, { blurSensitive: info.checked });
+  }
+});
+
+const createContextMenuItem = isBlurSensitive => {
+  extensionApiService.createContextMenu({
+    title: 'Blur secret data',
+    type: 'checkbox',
+    id: 'checkbox',
+    checked: isBlurSensitive,
+    contexts: ['page'],
+  });
 };
 
-// eslint-disable-next-line func-names
-extensionApiService.tabsQuery({ active: true, currentWindow: true }, function(tabs) {
-  const tab = tabs[0];
-  // Board JIRA
-  if (!/jql=/im.test(tab.url)) {
-    return;
-  }
-
-  // eslint-disable-next-line consistent-return
-  extensionApiService.onMessage((request, sender, sendResponse) => {
-    switch (request.action) {
-      case types.SET_CARDS:
-        state.jiraCards = {
-          issues: request.issues,
-          epics: request.epics,
-          specialFields: request.specialFields,
-        };
-        return sendResponse('OK');
-      case types.GET_CARDS:
-        return sendResponse(state.jiraCards);
-      case types.SET_ROLES:
-        state.roles = request.roles;
-        return sendResponse('OK');
-      case types.GET_ROLES:
-        return sendResponse(state.roles);
-      default:
+export const createContextMenu = (tabId, changeInfo) => {
+  extensionApiService.removeAllContextMenus(async () => {
+    const isScope = await extensionApiService.checkTabURLByPattern(tabId, regexpBoardUrl);
+    if (!isScope || changeInfo == null || changeInfo.status !== 'complete') {
+      return;
     }
+    extensionApiService.sendMessageToTab(tabId, { getBlurSensitive: true }, response => {
+      if (response && Object.prototype.hasOwnProperty.call(response, 'blurSensitive')) {
+        createContextMenuItem(response.blurSensitive);
+      }
+    });
   });
+};
 
-  extensionApiService.onTabsUpdated((tabId, changeInfo) => {
-    if (changeInfo.url) {
-      extensionApiService.sendMessageToTab(tabId, {
-        type: types.TAB_URL_CHANGE,
-        url: changeInfo.url,
-      });
-    }
-  });
+extensionApiService.onTabsUpdated(async (tabId, changeInfo) => {
+  createContextMenu(tabId, changeInfo);
+});
 
-  if (process.env.NODE_ENV === 'development') {
-    require('../shared/trackChanges') // eslint-disable-line
-      .default('refresh_background', () => extensionApiService.reload());
-  }
+extensionApiService.onTabsActivated(async activeInfo => {
+  createContextMenu(activeInfo.tabId);
 });
