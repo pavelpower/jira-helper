@@ -1,13 +1,18 @@
 export const settingsJiraDOM = {
-  openEditorBtn: 'edit-personal-wip-limit-btn-jh',
-  idPersonName: 'personal-name',
-  idLimit: 'limit',
-  idColumnSelect: 'column-select',
-  idApplyColumnSelect: 'apply-columns',
-  idSwimlaneSelect: 'column-select',
-  idApplySwimlaneSelect: 'apply-columns',
-  idButtonAddLimit: 'person-limit-save-button',
-  idButtonEditLimit: 'person-limit-edit-button',
+  openEditorBtn: 'edit-person-wip-limit-btn-jh',
+  idPersonName: 'edit-person-wip-limit-person-name',
+  idLimit: 'edit-person-wip-limit-person-limit',
+  idColumnSelect: 'edit-person-wip-limit-column-select',
+  idApplyColumnSelect: 'edit-person-wip-limit-apply-columns',
+  idSwimlaneSelect: 'edit-person-wip-limit-swimlane-select',
+  idApplySwimlaneSelect: 'edit-person-wip-limit-apply-swimlane',
+  idButtonAddLimit: 'edit-person-wip-limit-person-limit-save-button',
+  idButtonEditLimit: 'edit-person-wip-limit-person-limit-edit-button',
+  idTablePersonalWipLimit: 'edit-person-wip-limit-persons-limit-body',
+  idTableHeadPersons: 'edit-person-wip-limit-head-persons',
+  idTableHeadColumns: 'edit-person-wip-limit-head-columns',
+  idTableHeadSwimlanes: 'edit-person-wip-limit-head-swimlanes',
+  idTableHeadDelete: 'edit-person-wip-limit-head-delete',
 };
 
 export const groupSettingsBtnTemplate = () =>
@@ -59,7 +64,7 @@ export const formPersonalWipLimit = () => {
   </form>`;
 };
 
-export const AddPersonalWipLimit = ({ id, person, limit, columns, swimlanes }) => {
+export const addPersonalWipLimit = ({ id, person, limit, columns, swimlanes }) => {
   return `<tr id="row-${id}" class="person-row">
       <td><input type="checkbox" class="checkbox select-user-chb" data-id="${id}"></td>
       <td>${person.displayName}</td>
@@ -71,70 +76,18 @@ export const AddPersonalWipLimit = ({ id, person, limit, columns, swimlanes }) =
   `;
 };
 
-export const personLimitsModal = () => {
-  return `<section id="person-limits-dialog" class="aui-dialog2 aui-dialog2-large" role="dialog">
-  <header class="aui-dialog2-header" class="aui-dialog2-header">
-    <h2 class="aui-dialog2-header-main">Person limits</h2>
-  </header>
-
-  <div class="aui-dialog2-content">
-    <form class="aui">
-      <fieldset>
-        <table>
-          <tr>
-            <td>
-              <div class="field-group">
-                <label for="person-name">Person JIRA name</label>
-                <input class="text medium-field" type="text" id="person-name" name="person-name" placeholder="">
-              </div>
-
-              <div class="field-group">
-                <label for="limit">Max issues at work</label>
-                <input class="text medium-field" type="number" id="limit" name="limit" placeholder="">
-              </div>
-            </td>
-            <td>
-              <div class="field-group columns" style="display: flex">
-                <label>Columns</label>
-                <select id="column-select" class="select2" multiple style="margin: 0 12px; width: 195px;" size="4"></select>
-                <button id="apply-columns" class="aui-button aui-button-link">Apply columns<br/>for selected users</button>
-              </div>
-
-              <div class="field-group swimlanes" style="display: flex">
-                <label>Swimlanes</label>
-                <select id="swimlanes-select" class="select2" multiple style="margin: 0 12px;  width: 195px;" size="5"></select>
-                <button id="apply-swimlanes" class="aui-button aui-button-link">Apply swimlanes<br/>for selected users</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>&nbsp;</td>
-            <td>
-              <div class="buttons-container">
-                <div class="buttons">
-                  <button class="aui-button aui-button-primary" type="submit" id="person-limit-save-button">Add limit</button>
-                  <button class="aui-button aui-button-primary" type="submit" disabled id="person-limit-edit-button">Edit limit</button>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </fieldset>
-    </form>
-
-    <table class="aui">
-      <thead>
-      <tr>
-        <th></th>
-        <th id="person">Person</th>
-        <th id="limits">Limit</th>
-        <th id="columns">Columns</th>
-        <th id="swimlanes">Swimlanes</th>
-        <th id="delete">Delete</th>
-      </tr>
-      </thead>
-      <tbody id="persons-limit-body"></tbody>
-    </table>
-  </div>
-</section>`;
+export const tablePersonalWipLimit = () => {
+  return `<table class="aui">
+    <thead>
+    <tr>
+      <th></th>
+      <th id="${settingsJiraDOM.idTableHeadPersons}">Person</th>
+      <th id="${settingsJiraDOM.idTableHeadLimits}">Limit</th>
+      <th id="${settingsJiraDOM.idTableHeadColumns}">Columns</th>
+      <th id="${settingsJiraDOM.idTableHeadSwimlanes}">Swimlanes</th>
+      <th id="${settingsJiraDOM.idTableHeadDelete}">Delete</th>
+    </tr>
+    </thead>
+    <tbody id="${settingsJiraDOM.idTablePersonalWipLimit}"></tbody>
+  </table>`;
 };
