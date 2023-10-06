@@ -20,9 +20,12 @@ export default class extends PageModification {
     return Promise.all([this.getBoardEditData(), this.getBoardProperty(BOARD_PROPERTIES.WIP_LIMITS_CELLS)]);
   }
 
-  async apply([editData, WipLimitSetting]) {
+  async apply(data) {
+    if (!data) return;
+    const [editData, WipLimitSetting] = data;
+
     if (!WipLimitSetting) {
-      return null;
+      return;
     }
 
     this.wip = WipLimitSetting;

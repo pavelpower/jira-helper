@@ -33,7 +33,9 @@ export default class PersonalWIPLimit extends PageModification {
     return Promise.all([this.getBoardEditData(), this.getBoardProperty(BOARD_PROPERTIES.PERSON_LIMITS)]);
   }
 
-  apply([boardData = {}, personLimits = { limits: [] }]) {
+  apply(data) {
+    if (!data) return;
+    const [boardData = {}, personLimits = { limits: [] }] = data;
     if (!boardData.canEdit) return;
 
     this.boardData = boardData;

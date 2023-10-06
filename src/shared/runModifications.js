@@ -28,7 +28,7 @@ const applyModification = async (Modification, modificationInstance) => {
     // loadingElement.dataset[Modification.name] = true;
     modificationInstance.apply(data, loadingElement);
   } catch (err) {
-    window.console.error('jira-helper: Load Data Filed:', err);
+    // window.console.error('jira-helper: Load Data Filed:', err);
 
     // Run function apply after white load page, and without load data from server
     loadingPromise.then(() => {

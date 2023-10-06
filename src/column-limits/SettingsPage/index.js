@@ -58,7 +58,9 @@ export default class SettingsWIPLimits extends PageModification {
     return Promise.all([this.getBoardEditData(), this.getBoardProperty(BOARD_PROPERTIES.WIP_LIMITS_SETTINGS)]);
   }
 
-  apply([boardData = {}, wipLimits = {}]) {
+  apply(data) {
+    if (!data) return;
+    const [boardData = {}, wipLimits = {}] = data;
     if (!boardData.canEdit) return;
 
     this.wipLimits = wipLimits;

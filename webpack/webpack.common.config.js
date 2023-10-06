@@ -12,7 +12,6 @@ module.exports = {
   entry: {
     content: ['./src/content.js'], // TODO fix AutoRefreshPlugin to work without []
     background: './src/background/background.js',
-    // blureforsensitive: './src/blure-for-sensitive/blurSensitive.js',
   },
   output: {
     filename: '[name].js',
@@ -57,7 +56,6 @@ module.exports = {
       { from: './src/issue/img/**/*', to: './img', flatten: true },
       { from: './src/assets/**/*', to: './src', flatten: true },
       { from: './src/manifest.json', to: './' },
-      { from: './src/person-limits/nativeModalScript.js', to: './' },
       { from: './src/blur-for-sensitive/blurSensitive.css', to: './src', flatten: true },
     ]),
     new webpack.DefinePlugin({

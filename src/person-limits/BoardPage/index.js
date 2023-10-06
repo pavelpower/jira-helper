@@ -106,7 +106,9 @@ export default class extends PageModification {
     return Promise.all([this.getBoardEditData(), this.getBoardProperty(BOARD_PROPERTIES.PERSON_LIMITS)]);
   }
 
-  apply([editData = {}, personLimits]) {
+  apply(data) {
+    if (!data) return;
+    const [editData = {}, personLimits] = data;
     if (!personLimits || !personLimits.limits.length) return;
 
     this.cssSelectorOfIssues = this.getCssSelectorOfIssues(editData);

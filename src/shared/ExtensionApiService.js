@@ -20,7 +20,9 @@ class ExtensionApiService {
   }
 
   onMessage(cb) {
-    return this.extensionAPI.runtime.onMessage.addListener(cb);
+    return this.extensionAPI.runtime.onMessage.addListener((request, sender, sendResponse) => {
+      return cb(request, sender, sendResponse);
+    });
   }
 
   onTabsUpdated(cb) {
@@ -41,7 +43,10 @@ class ExtensionApiService {
 
   async checkTabURLByPattern(tabId, regexp) {
     const tab = await this.extensionAPI.tabs.get(tabId);
-    return regexp.test(tab.url);
+    // eslint-disable-next-line no-new-wrappers
+    const result = new Boolean(regexp.test(tab.url));
+    result.url = tab.url;
+    return result;
   }
 
   tabsExecuteScript(tabId, details) {
@@ -49,10 +54,10 @@ class ExtensionApiService {
   }
 
   sendMessageToTab(tabId, message, response) {
-    if (this.isFirefox()) {
+    if (response) {
       return this.extensionAPI.tabs.sendMessage(tabId, message).then(response);
     }
-    return this.extensionAPI.tabs.sendMessage(tabId, message, response);
+    return this.extensionAPI.tabs.sendMessage(tabId, message);
   }
 
   reload() {

@@ -31,14 +31,6 @@
         {
             "resources": ["img/*"],
             "use_dynamic_url": true
-        },
-        {
-            "resources": ["nativeModalScript.js"],
-            "use_dynamic_url": true
-        },
-        {
-            "resources": ["options.html"],
-            "use_dynamic_url": true
         }
     ],
     "content_security_policy": {

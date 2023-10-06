@@ -2,14 +2,41 @@ import { types } from './actions';
 import { extensionApiService } from '../shared/ExtensionApiService';
 
 const regexpBoardUrl = /rapidView=(\d*)/im;
+const regexpBoardSettingsTabUrl = /tab=/im;
+const regexpChartControlChart = /chart=controlChart/im;
 
-// FOR ROATING
-extensionApiService.onTabsUpdated((tabId, changeInfo) => {
-  if (changeInfo.url) {
-    extensionApiService.sendMessageToTab(tabId, {
-      type: types.TAB_URL_CHANGE,
-      url: changeInfo.url,
-    });
+// FOR ROATING OF TAB
+extensionApiService.onTabsUpdated(async (tabId, changeInfo) => {
+  if (changeInfo.status === 'complete') {
+    const isScopeControlChart = await extensionApiService.checkTabURLByPattern(tabId, regexpChartControlChart);
+    if (isScopeControlChart) {
+      extensionApiService.sendMessageToTab(
+        tabId,
+        {
+          type: types.TAB_URL_CHANGE,
+          url: isScopeControlChart.url,
+        },
+        response => {
+          // eslint-disable-next-line no-console
+          console.log(response.message);
+        }
+      );
+    }
+  }
+
+  if (changeInfo.url == null) return;
+  if (regexpBoardUrl.test(changeInfo.url) && regexpBoardSettingsTabUrl.test(changeInfo.url)) {
+    extensionApiService.sendMessageToTab(
+      tabId,
+      {
+        type: types.TAB_URL_CHANGE,
+        url: changeInfo.url,
+      },
+      response => {
+        // eslint-disable-next-line no-console
+        console.log(response.message);
+      }
+    );
   }
 });
 

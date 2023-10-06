@@ -46,7 +46,9 @@ export default class SwimlaneSettingsLimit extends PageModification {
     ]);
   }
 
-  apply([boardData, settings]) {
+  apply(data) {
+    if (!data) return;
+    const [boardData, settings] = data;
     this.settings = settings;
     this.boardData = boardData;
 

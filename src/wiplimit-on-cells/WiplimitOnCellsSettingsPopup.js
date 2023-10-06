@@ -30,7 +30,10 @@ export default class WipLimitOnCells extends PageModification {
     ]);
   }
 
-  apply([boardData, [settings]]) {
+  apply(data) {
+    if (!data) return;
+    const boardData = data[0];
+    let [settings] = data[1];
     if (!(boardData && boardData.canEdit)) return;
 
     this.boardData = boardData;

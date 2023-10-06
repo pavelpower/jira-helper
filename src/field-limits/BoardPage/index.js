@@ -45,7 +45,9 @@ export default class FieldLimitsSettingsPage extends PageModification {
     return [boardData, fieldLimits];
   }
 
-  apply([boardData = {}, fieldLimits]) {
+  apply(data) {
+    if (!data) return;
+    const [boardData = {}, fieldLimits] = data;
     if (isEmpty(fieldLimits) || isEmpty(fieldLimits.limits)) return;
     this.fieldLimits = fieldLimits;
     this.cssSelectorOfIssues = this.getCssSelectorOfIssues(boardData);
