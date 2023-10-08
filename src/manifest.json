@@ -47,8 +47,7 @@
         "activeTab",
         "storage",
         "tabs",
-        "contextMenus",
-        "debugger"
+        "contextMenus"
     ],
     "host_permissions": ["http://*/*", "https://*/*"]
 }
