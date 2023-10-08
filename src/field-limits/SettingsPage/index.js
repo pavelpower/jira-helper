@@ -53,22 +53,24 @@ export default class FieldLimitsSettingsPage extends PageModification {
     return Promise.all([this.getBoardEditData(), this.getBoardProperty(BOARD_PROPERTIES.FIELD_LIMITS)]);
   }
 
-  apply([
-    boardData = {},
-    quickFilterSettings = {
-      limits: {
-        /*
-          [limitKeys.encode(....)]: {
-              fieldValue: string,
-              fieldId: string,
-              limit: number,
-              columns: string[],
-              swimlanes: string[]
-           }
-        */
+  apply(data) {
+    if (!data) return;
+    const [
+      boardData = {},
+      quickFilterSettings = {
+        limits: {
+          /*
+            [limitKeys.encode(....)]: {
+                fieldValue: string,
+                fieldId: string,
+                limit: number,
+                columns: string[],
+                swimlanes: string[]
+             }
+          */
+        },
       },
-    },
-  ]) {
+    ] = data;
     if (!boardData.canEdit) return;
 
     this.boardData = boardData;

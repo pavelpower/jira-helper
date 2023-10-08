@@ -126,7 +126,7 @@ export class TableRangeWipLimit {
       if (Array.isArray(element.cells)) {
         element.cells.forEach(elem => {
           const badge = document.createElement('span');
-          badge.innerText = this.getNameLabel(elem.swimline, elem.column);
+          badge.innerText = this.getNameLabel(elem.swimlane, elem.column);
           badge.style.minHeight = '21px';
           badge.style.margin = '2px';
           badge.classList.add('aui-badge');
@@ -144,7 +144,7 @@ export class TableRangeWipLimit {
           );
           trashTag.style.margin = '1px';
           trashTag.addEventListener('click', () => {
-            this.deleteCells(id, elem.swimline, elem.column);
+            this.deleteCells(id, elem.swimlane, elem.column);
           });
           badge.appendChild(trashTag);
           td.appendChild(badge);
@@ -200,11 +200,11 @@ export class TableRangeWipLimit {
     return true;
   }
 
-  deleteCells(id, swimline, column) {
+  deleteCells(id, swimlane, column) {
     this.data.forEach(range => {
       if (range.name === id) {
         const newCells = range.cells.filter(
-          elem => !(elem.swimline === swimline.toString() && elem.column === column.toString())
+          elem => !(elem.swimlane === swimlane.toString() && elem.column === column.toString())
         );
         range.cells = newCells;
       }
@@ -231,7 +231,7 @@ export class TableRangeWipLimit {
     let unique = true;
     const range = searchDouble[0];
     for (const cellData of range.cells) {
-      if (cell.swimline === cellData.swimline && cell.column === cellData.column) {
+      if (cell.swimlane === cellData.swimlane && cell.column === cellData.column) {
         unique = false;
       }
     }
@@ -259,7 +259,7 @@ export class TableRangeWipLimit {
             <th style="width:30%" >Range name</th>
             <th style="width:10%">WIP limit</th>
             <th style="width:3%">Disable</th>
-            <th style="width:50%">Cells (swimeline/column)</th>
+            <th style="width:50%">Cells (swimelane/column)</th>
           </tr>`
     );
     const tbody = document.createElement('tbody');

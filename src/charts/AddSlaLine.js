@@ -284,7 +284,9 @@ export default class extends PageModification {
     return Promise.all([this.getBoardProperty(BOARD_PROPERTIES.SLA_CONFIG), this.getBoardEditData()]);
   }
 
-  async apply([{ value = 0 } = {}, { canEdit }], chartElement) {
+  async apply(data, chartElement) {
+    if (!data) return;
+    const [{ value = 0 } = {}, { canEdit }] = data;
     await this.waitForElement('.tick', chartElement);
 
     let slaValue = Number(value);

@@ -30,7 +30,9 @@ export default class extends PageModification {
     ]);
   }
 
-  apply([editData = {}, boardGroups = {}, swimlanesSettings = {}]) {
+  apply(data) {
+    if (!data) return;
+    const [editData = {}, boardGroups = {}, swimlanesSettings = {}] = data;
     this.boardGroups = boardGroups;
     this.swimlanesSettings = swimlanesSettings;
     this.mappedColumns = editData.rapidListConfig.mappedColumns.filter(({ isKanPlanColumn }) => !isKanPlanColumn);

@@ -1,8 +1,10 @@
-/* global browser */
+/* global browser chrome navigator */
 
 class ExtensionApiService {
   constructor() {
-    this.extensionAPI = window.chrome || window.browser;
+    if (typeof chrome !== 'undefined') {
+      this.extensionAPI = chrome;
+    }
 
     if (!this.extensionAPI && typeof browser !== 'undefined') {
       this.extensionAPI = browser;
@@ -10,7 +12,7 @@ class ExtensionApiService {
   }
 
   isFirefox() {
-    return window.navigator.userAgent.includes('Firefox');
+    return navigator.userAgent.includes('Firefox');
   }
 
   getUrl(resource) {
@@ -18,7 +20,9 @@ class ExtensionApiService {
   }
 
   onMessage(cb) {
-    return this.extensionAPI.runtime.onMessage.addListener(cb);
+    return this.extensionAPI.runtime.onMessage.addListener((request, sender, sendResponse) => {
+      return cb(request, sender, sendResponse);
+    });
   }
 
   onTabsUpdated(cb) {
@@ -33,15 +37,27 @@ class ExtensionApiService {
     return this.extensionAPI.tabs.query(options, cb);
   }
 
+  getTab(tabId) {
+    return this.extensionAPI.tabs.get(tabId);
+  }
+
+  async checkTabURLByPattern(tabId, regexp) {
+    const tab = await this.extensionAPI.tabs.get(tabId);
+    // eslint-disable-next-line no-new-wrappers
+    const result = new Boolean(regexp.test(tab.url));
+    result.url = tab.url;
+    return result;
+  }
+
   tabsExecuteScript(tabId, details) {
     return this.extensionAPI.tabs.executeScript(tabId, details);
   }
 
   sendMessageToTab(tabId, message, response) {
-    if (this.isFirefox()) {
+    if (response) {
       return this.extensionAPI.tabs.sendMessage(tabId, message).then(response);
     }
-    return this.extensionAPI.tabs.sendMessage(tabId, message, response);
+    return this.extensionAPI.tabs.sendMessage(tabId, message);
   }
 
   reload() {
@@ -70,12 +86,16 @@ class ExtensionApiService {
     });
   }
 
-  createContextMenu(config) {
-    return this.extensionAPI.contextMenus.create(config);
-  }
-
   removeAllContextMenus(cb) {
     return this.extensionAPI.contextMenus.removeAll(cb);
+  }
+
+  addContextMenuListener(cb) {
+    return this.extensionAPI.contextMenus.onClicked.addListener(cb);
+  }
+
+  createContextMenu(config) {
+    return this.extensionAPI.contextMenus.create(config);
   }
 }
 

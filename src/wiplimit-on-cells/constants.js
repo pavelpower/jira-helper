@@ -1,6 +1,6 @@
 // settings
 export const settingsJiraDOM = {
-  swimlineSelect: 'WIPLC_SwimLine',
+  swimlaneSelect: 'WIPLC_swimlane',
   columnSelect: 'WIPLC_Column',
   showBadge: 'WIPLC_showBadge',
   table: 'WIP_tableDiv',
@@ -9,10 +9,11 @@ export const settingsJiraDOM = {
   disableRange: 'WIP_disableRange',
   buttonRange: 'WIP_buttonRange',
   chooseCheckbox: 'WIP_chooseCheckbox',
+  editLimitsBtn: 'edit-WipLimitOnCells-btn-jh',
 };
 
-export const settingsEditWipLimitOnCells = btnId => `
-            <button id="${btnId}" class="aui-button" type="button">Edit Wip limits by cells</button>
+export const settingsEditWipLimitOnCells = () => `
+            <button id="${settingsJiraDOM.editLimitsBtn}" class="aui-button" type="button">Edit Wip limits by cells</button>
         `;
 
 export const ClearDataButton = btnId => `<div style="margin-top: 1rem">
@@ -29,13 +30,13 @@ export const RangeName = () => `
 </form>`;
 // <input type="checkbox" class="checkbox select-user-chb" data-id="${id}"></input>
 
-export const cellsAdd = (swimlines, collums) => {
-  if (!Array.isArray(collums) || !Array.isArray(swimlines)) {
+export const cellsAdd = (swimlanes, collums) => {
+  if (!Array.isArray(collums) || !Array.isArray(swimlanes)) {
     return '';
   }
-  const swimlinesHTML = [];
-  swimlines.forEach(element => {
-    swimlinesHTML.push(`<option value=${element.id} >${element.name}</option>`);
+  const swimlanesHTML = [];
+  swimlanes.forEach(element => {
+    swimlanesHTML.push(`<option value=${element.id} >${element.name}</option>`);
   });
   const collumsHTML = [];
   collums.forEach(element => {
@@ -45,10 +46,10 @@ export const cellsAdd = (swimlines, collums) => {
     <div style="margin-top: 1rem">
               <form class="aui">
               <div class="field-group">
-              <label for="${settingsJiraDOM.swimlineSelect}">Swimline </label>
-    <select id="${settingsJiraDOM.swimlineSelect}">
+              <label for="${settingsJiraDOM.swimlaneSelect}">swimlane </label>
+    <select id="${settingsJiraDOM.swimlaneSelect}">
         <option>-</option>
-        ${swimlinesHTML.join('')}
+        ${swimlanesHTML.join('')}
     </select>
     </div>
 

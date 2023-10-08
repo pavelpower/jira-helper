@@ -8,17 +8,14 @@ import SwimlaneLimits from './swimlane/SwimlaneLimits';
 import SwimlaneSettingsPopup from './swimlane/SwimlaneSettingsPopup';
 import WIPLimitsSettingsPage from './column-limits/SettingsPage';
 import WIPLimitsBoardPage from './column-limits/BoardPage';
-import TetrisPlanningButton from './tetris-planning/TetrisPlanningButton';
-import TetrisPlanning from './tetris-planning/TetrisPlanning';
 import BugTemplate from './bug-template/BugTemplate';
 import MarkFlaggedIssues from './issue/MarkFlaggedIssues';
 import ToggleForRightSidebar from './issue/ToggleForRightSidebar';
 import FieldLimitsSettingsPage from './field-limits/SettingsPage';
 import FieldLimitsBoardPage from './field-limits/BoardPage';
-import PrintCards from './printcards/PrintCards';
 import { setUpBlurSensitiveOnPage, initBlurSensitive } from './blur-for-sensitive/blurSensitive';
-import PersonLimitsSettings from './person-limits/PersonLimitsSettings';
-import PersonLimits from './person-limits/PersonLimits';
+import PersonLimitsSettings from './person-limits/SettingsPage';
+import PersonLimits from './person-limits/BoardPage';
 import WiplimitOnCells from './wiplimit-on-cells/WipLimitOnCells';
 import WiplimitOnCellsSettings from './wiplimit-on-cells/WiplimitOnCellsSettingsPopup';
 
@@ -45,18 +42,16 @@ async function start() {
       MarkFlaggedIssues,
       FieldLimitsBoardPage,
       WiplimitOnCells,
-      TetrisPlanning,
     ],
     [Routes.SETTINGS]: [
       SwimlaneSettingsPopup,
       WIPLimitsSettingsPage,
       PersonLimitsSettings,
-      TetrisPlanningButton,
       FieldLimitsSettingsPage,
       WiplimitOnCellsSettings,
     ],
     [Routes.ISSUE]: [MarkFlaggedIssues, ToggleForRightSidebar],
-    [Routes.SEARCH]: [MarkFlaggedIssues, ToggleForRightSidebar, PrintCards],
+    [Routes.SEARCH]: [MarkFlaggedIssues, ToggleForRightSidebar],
     [Routes.REPORTS]: [AddSlaLine, AddChartGrid],
     [Routes.ALL]: [BugTemplate],
   };

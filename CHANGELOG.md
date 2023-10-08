@@ -16,6 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 — Choosing color for column WIP-limit from [@davakh](https://github.com/davakh)
-— Pop Up for set Swimline WIP-limits from [@davakh](https://github.com/davakh)
+— Pop Up for set swimlane WIP-limits from [@davakh](https://github.com/davakh)
 — text-template for sub-tasks from [@pavelpower](https://github.com/pavelpower)
 — WIP-limit for Epics [@davakh](https://github.com/davakh)

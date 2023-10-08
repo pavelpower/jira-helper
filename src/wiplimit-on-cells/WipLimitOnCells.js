@@ -20,9 +20,12 @@ export default class extends PageModification {
     return Promise.all([this.getBoardEditData(), this.getBoardProperty(BOARD_PROPERTIES.WIP_LIMITS_CELLS)]);
   }
 
-  async apply([editData, WipLimitSetting]) {
+  async apply(data) {
+    if (!data) return;
+    const [editData, WipLimitSetting] = data;
+
     if (!WipLimitSetting) {
-      return null;
+      return;
     }
 
     this.wip = WipLimitSetting;
@@ -39,7 +42,7 @@ export default class extends PageModification {
 
       const matrixRange = this.arrayClone(emptyMartix);
       for (const cell of range.cells) {
-        const selector = `[swimlane-id='${cell.swimline}'] [data-column-id='${cell.column}']`;
+        const selector = `[swimlane-id='${cell.swimlane}'] [data-column-id='${cell.column}']`;
         const [cellsDOM] = document.querySelectorAll(selector);
         if (cellsDOM) {
           const { length } = cellsDOM.querySelectorAll(this.counterCssSelector);

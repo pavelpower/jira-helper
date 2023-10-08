@@ -127,9 +127,10 @@ export const getIssueId = () => {
 };
 
 export const onUrlChange = cb => {
-  extensionApiService.onMessage(message => {
-    if (message.type === types.TAB_URL_CHANGE) {
-      cb(message.url);
+  extensionApiService.onMessage((request, sender, sendResponse) => {
+    if (!sender.tab && request.type === types.TAB_URL_CHANGE) {
+      cb(request.url);
+      sendResponse({ message: 'change event received' });
     }
   });
 };

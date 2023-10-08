@@ -2,12 +2,12 @@
 
 [eng](./index.md)
 
-## Swimline Chart Bar
+## swimlane Chart Bar
 
 Работает в заголовках Swimlane.
 
 При наведении курсора мыши на bar всплывает подсказка (title) в которой показывается название
-ассоциированной колонки доски с bar и количество задач в этой колонке для этого swimline.
+ассоциированной колонки доски с bar и количество задач в этой колонке для этого swimlane.
 
 ![Chart Bar](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_ChartBar.gif)
 
@@ -42,70 +42,6 @@
 При помощи которых можно сохранить Template для этого типа задач к себе в localStorage браузера (шаблон сохранится к на вашем компьютере).
 
 ![description template](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_description_template.gif)
-
-
-## Tetris-planning for Scrum
-
-Тетрис-планирование позволяет для разных специалистов указывать свой параметр размера задачи. 
-
->Если в вашей команде есть специалисты программисты и специалисты по тестированию, и они работают только в рамках своего >специализированного колодца, то общая оценка по задаче будет затруднительна.
->
->Это происходит потому, что специалисты из разных колодцев плохо понимают контекст друг друга.
->
->Для решения этой проблемы можно воспользоваться техникой Тетрис-планирования.
->
->Такой подход был популяризирован Максимом Дорофеевым на [этом докладе](https://www.youtube.com/watch?v=fsqXlW_m0Bo&t=1365s)
->
->Однако, есть и критика такого подхода: ["Как сейчас «неправильно планируют» в Agile"](https://filipyev.ru/2020/01/04/planirovanie-v-agile/)
-
-При использовании Scrum-доскок в JIRA, у вас появляется возможность использовать объединение задач в Sprint.
-
-Стандартно JIRA предоставляет оценку только по одному выбранному значению, например по Story Points.
-
-Тогда, в заголовке Sprint будут видны суммы по Story Points от задач, которые еще не взяты в работу (_серые_), в работе (_синие_) и выполненные (_зеленые_).
-
-![sprint head with story points](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_sprinthead_with_storypoints.png)
-
-Плагин **jira-helper** добавляет функционал позволяющий визуализировать оценку сразу по нескольким числовым параметрам.
-
-Не важно, это будут Story Points, или любой другой численный Estimate.
-
-В бэклоге Scrum доски, для каждого Sprint в его заголовке появятся выбранные значения по нескольким выбранным параметрам.
-
-В виде: `param name: (the sum of estimate in sprint)/(max sum of estimate)`
-
-Где
-- `param name` - название параметра по которому считаеться оценка
-- `the sum of estimate in sprint` - сумма оценки по этому параметру для всех оценненных задач попавших в этот Sprint
-- `max sum of estimate` – максимально возомжная сумма для этого Sprint
-
-В случае если `the sum of estimate in sprint` будет превышать `max sum of estimate` тег будет красного цвета - сигнализируя о том, что для данного Sprint по этому параметру больше нельзя добавлять задач.
-
-В ином случае тег будет зеленого цвета.
-
-_"Board Settings (Scrum board) -> Estimates"_  Сохранять значение может только Администратор board.
-
-![tetris planning](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_tetris_planning.gif)
-
-
-## Printing many stickers
-
-Используется для печати множества стикеров при помощи офисного лазерного принтера.
-
-![как использозвать печать](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_jql_print.gif)
-
-Для печати стикеров на обычной бумаге формата A4 можно воспользоваться [шаблоном](chrome-extension://egmbomekcmpieccamghfgjgnlllgbgdl/options.html)
-
-![шаблон печати стикеров](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_jql_print_template.gif)
-
-Шаблон для печати использует 
-* шрифты [GOST A](https://ffont.ru/font/gost-type-a) и [GOST B](https://ffont.ru/font/gost-type-b)
-* особую форму отображения номера задачи снизу стикера
-* цветное отображение связанного эпика задачи (в примере ниже Epic Name: "Песни")
-
-Это позволяет удобно использовать напечатанные стикеры на доске таким образом
-![sample position a stickers on a desck](https://raw.githubusercontent.com/pavelpower/jira-helper/images/features/jirahelper_jql_print_stiker_position_on_desk_w600.png)
-
 
 ## WIP-limits for several columns (CONWIP)
 _WIP – work in progress_
@@ -159,7 +95,7 @@ _"Board Settings -> Swimlane"_
 
 Вы можете установить WIP-limit на человека если войдете в настройки колонок на доске.
 
-При этом, вы можете указать в каких колонках и swimline учитывать какой вам нужно WIP-лимит на человека.
+При этом, вы можете указать в каких колонках и swimlane учитывать какой вам нужно WIP-лимит на человека.
 
 
 ## WIP-limit for Field Value
@@ -230,7 +166,7 @@ _"Board Settings -> Swimlane"_
 * `Visual Name` = `To Do`
 * `WIP Limit` = `10`
 * `Columns` = `Planned`
-* `Swimline` — выбрать все
+* `swimlane` — выбрать все
 
 А второе будет с настройками
 * `Field` = `Story Points`
@@ -238,7 +174,7 @@ _"Board Settings -> Swimlane"_
 * `Visual Name` = `In Progress`
 * `WIP Limit` = `5`
 * `Columns` = `In Progress`
-* `Swimline` — выбрать все
+* `swimlane` — выбрать все
 
 Значение `Field Value` указанное как `∑(`<любая буква>`)` — подсказывает, что надо суммировать
 числовые значения для jira-helper. А буквы нужно ставить разные, потому, что значение поля это часть 
