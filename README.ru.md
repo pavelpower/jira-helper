@@ -128,4 +128,4 @@ npm run dev
 
 Этот же номер версии будет соответствовать номеру публикуемого в ["Chrome WebStore"](https://chrome.google.com/webstore/detail/jira-helper/egmbomekcmpieccamghfgjgnlllgbgdl)
 
-_Может использоватся в Chrome [version >= 55](./src/manifest.json)_
+_Может использоватся в Chrome [version >= 88](./src/manifest.json)_
