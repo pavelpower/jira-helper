@@ -12,7 +12,7 @@
         "64": "src/jira_helper_64x64.png",
         "128": "src/jira_helper_128x128.png"
     },
-    "minimum_chrome_version": "55",
+    "minimum_chrome_version": "88",
     "action": {
         "default_icon": {
             "16": "src/jira_helper_16x16.png",
