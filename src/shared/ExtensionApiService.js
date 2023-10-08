@@ -54,10 +54,13 @@ class ExtensionApiService {
   }
 
   sendMessageToTab(tabId, message, response) {
-    if (response) {
-      return this.extensionAPI.tabs.sendMessage(tabId, message).then(response);
+    if (/chrome:\/\//gim.test(`${message?.url}`)) {
+      return Promise.resolve();
     }
-    return this.extensionAPI.tabs.sendMessage(tabId, message);
+    if (response == null) {
+      throw new Error('Response for sendMessageToTab is must!');
+    }
+    return this.extensionAPI.tabs.sendMessage(tabId, message).then(response);
   }
 
   reload() {

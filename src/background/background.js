@@ -18,7 +18,7 @@ extensionApiService.onTabsUpdated(async (tabId, changeInfo) => {
         },
         response => {
           // eslint-disable-next-line no-console
-          console.log(response.message);
+          console.log(response?.message);
         }
       );
     }
@@ -34,7 +34,7 @@ extensionApiService.onTabsUpdated(async (tabId, changeInfo) => {
       },
       response => {
         // eslint-disable-next-line no-console
-        console.log(response.message);
+        console.log(response?.message);
       }
     );
   }
