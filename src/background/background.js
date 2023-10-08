@@ -43,7 +43,10 @@ extensionApiService.onTabsUpdated(async (tabId, changeInfo) => {
 extensionApiService.addContextMenuListener(async (info, tab) => {
   const isScope = await extensionApiService.checkTabURLByPattern(tab.id, regexpBoardUrl);
   if (isScope) {
-    extensionApiService.sendMessageToTab(tab.id, { blurSensitive: info.checked });
+    extensionApiService.sendMessageToTab(tab.id, { blurSensitive: info.checked }, response => {
+      // eslint-disable-next-line no-console
+      console.log(info.checked ? 'added the blur of data' : 'removed the blur of data', response);
+    });
   }
 });
 
