@@ -47,7 +47,7 @@ export const cellsAdd = (swimlanes, collums) => {
               <form class="aui">
               <div class="field-group">
               <label for="${settingsJiraDOM.swimlaneSelect}">swimlane </label>
-    <select id="${settingsJiraDOM.swimlaneSelect}">
+    <select id="${settingsJiraDOM.swimlaneSelect}" style="width:100%">
         <option>-</option>
         ${swimlanesHTML.join('')}
     </select>
@@ -55,7 +55,7 @@ export const cellsAdd = (swimlanes, collums) => {
 
     <div class="field-group">
     <label for="${settingsJiraDOM.columnSelect}">Collumn </label>
-    <select id="${settingsJiraDOM.columnSelect}">
+    <select id="${settingsJiraDOM.columnSelect}" style="width:100%">
     <option>-</option>
         ${collumsHTML.join('')}
     </select>

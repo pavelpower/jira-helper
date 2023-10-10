@@ -34,16 +34,13 @@ export default class WipLimitOnCells extends PageModification {
     if (!data) return;
     const boardData = data[0];
     let [settings] = data[1];
+    settings = settings || [];
     if (!(boardData && boardData.canEdit)) return;
 
     this.boardData = boardData;
     // swimlines - this error in word may be save this variant;
     this.swimlane = this.boardData?.swimlanesConfig?.swimlanes;
     this.column = this.boardData?.rapidListConfig?.mappedColumns?.filter(i => !i.isKanPlanColumn);
-    this.renderEditButton();
-    this.onDOMChange('#columns', () => {
-      this.renderEditButton();
-    });
 
     // TODO: with fixed error saved settings name "swimline" => "swimlane"
     settings = settings.map(limit => {
@@ -67,6 +64,11 @@ export default class WipLimitOnCells extends PageModification {
       return `${swimlane?.name} / ${column?.name}`;
     };
     this.table = new TableRangeWipLimit({ data: this.data, handleGetNameLabel });
+
+    this.renderEditButton();
+    this.onDOMChange('#columns', () => {
+      this.renderEditButton();
+    });
   }
 
   appendStyles() {
