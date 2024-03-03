@@ -115,14 +115,24 @@ export default class PersonalWIPLimit extends PageModification {
     unmountPopup();
   };
 
+  updateLineLimits = settingName => {
+    const data = this.getDataForm();
+
+    this.personLimits.limits = this.personLimits.limits.map(limit => {
+      limit[settingName] = data[settingName];
+      return limit;
+    });
+    return this.renderAllRow();
+  };
+
   onApplyColumnForAllUser = async e => {
     e.preventDefault();
-    window.console.log('Apply Columns');
+    return this.updateLineLimits('columns');
   };
 
   onApplySwimlaneForAllUser = async e => {
     e.preventDefault();
-    window.console.log('Apply Swimlane');
+    return this.updateLineLimits('swimlanes');
   };
 
   onAddLimit = async e => {
