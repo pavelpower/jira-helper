@@ -73,7 +73,11 @@ export default class PersonalWIPLimit extends PageModification {
     await this.popup.appendToContent(tablePersonalWipLimit());
 
     this.DOMselectColumns = document.getElementById(settingsJiraDOM.idColumnSelect);
+    this.DOMapplyColumnSelect = document.getElementById(settingsJiraDOM.idApplyColumnSelect);
+
     this.DOMselectSwimlane = document.getElementById(settingsJiraDOM.idSwimlaneSelect);
+    this.DOMapplySwimlaneSelect = document.getElementById(settingsJiraDOM.idApplySwimlaneSelect);
+
     this.DOMfieldLimit = document.getElementById(settingsJiraDOM.idLimit);
     this.DOMfieldPersonName = document.getElementById(settingsJiraDOM.idPersonName);
     this.DOMtablePersonalWipLimit = document.getElementById(settingsJiraDOM.idTablePersonalWipLimit);
@@ -87,6 +91,9 @@ export default class PersonalWIPLimit extends PageModification {
 
     this.DOMAddLimit.addEventListener('click', async event => this.onAddLimit(event));
     this.DOMEditLimit.addEventListener('click', async event => this.onEditLimit(event));
+
+    this.DOMapplyColumnSelect.addEventListener('click', async event => this.onApplyColumnForAllUser(event));
+    this.DOMapplySwimlaneSelect.addEventListener('click', async event => this.onApplySwimlaneForAllUser(event));
   };
 
   addOptionsToSelect = (DOMSelect, items) => {
@@ -106,6 +113,16 @@ export default class PersonalWIPLimit extends PageModification {
   handleSubmit = async unmountPopup => {
     // await this.updateBoardProperty(BOARD_PROPERTIES.WIP_LIMITS_SETTINGS, this.getWipLimitsForOnlyExistsColumns());
     unmountPopup();
+  };
+
+  onApplyColumnForAllUser = async e => {
+    e.preventDefault();
+    window.console.log('Apply Columns');
+  };
+
+  onApplySwimlaneForAllUser = async e => {
+    e.preventDefault();
+    window.console.log('Apply Swimlane');
   };
 
   onAddLimit = async e => {
