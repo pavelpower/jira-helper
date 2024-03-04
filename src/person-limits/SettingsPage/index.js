@@ -73,7 +73,11 @@ export default class PersonalWIPLimit extends PageModification {
     await this.popup.appendToContent(tablePersonalWipLimit());
 
     this.DOMselectColumns = document.getElementById(settingsJiraDOM.idColumnSelect);
+    this.DOMapplyColumnSelect = document.getElementById(settingsJiraDOM.idApplyColumnSelect);
+
     this.DOMselectSwimlane = document.getElementById(settingsJiraDOM.idSwimlaneSelect);
+    this.DOMapplySwimlaneSelect = document.getElementById(settingsJiraDOM.idApplySwimlaneSelect);
+
     this.DOMfieldLimit = document.getElementById(settingsJiraDOM.idLimit);
     this.DOMfieldPersonName = document.getElementById(settingsJiraDOM.idPersonName);
     this.DOMtablePersonalWipLimit = document.getElementById(settingsJiraDOM.idTablePersonalWipLimit);
@@ -87,6 +91,9 @@ export default class PersonalWIPLimit extends PageModification {
 
     this.DOMAddLimit.addEventListener('click', async event => this.onAddLimit(event));
     this.DOMEditLimit.addEventListener('click', async event => this.onEditLimit(event));
+
+    this.DOMapplyColumnSelect.addEventListener('click', async event => this.onApplyColumnForAllUser(event));
+    this.DOMapplySwimlaneSelect.addEventListener('click', async event => this.onApplySwimlaneForAllUser(event));
   };
 
   addOptionsToSelect = (DOMSelect, items) => {
@@ -104,8 +111,31 @@ export default class PersonalWIPLimit extends PageModification {
   };
 
   handleSubmit = async unmountPopup => {
-    // await this.updateBoardProperty(BOARD_PROPERTIES.WIP_LIMITS_SETTINGS, this.getWipLimitsForOnlyExistsColumns());
+    await this.updateBoardProperty(BOARD_PROPERTIES.PERSON_LIMITS, this.personLimits);
     unmountPopup();
+  };
+
+  updateLineLimits = settingName => {
+    const data = this.getDataForm();
+    const selectedPerson = this.getSelectedPerson();
+
+    this.personLimits.limits = this.personLimits.limits.map(limit => {
+      if (selectedPerson.indexOf(limit.id) > -1) {
+        limit[settingName] = data[settingName];
+      }
+      return limit;
+    });
+    return this.renderAllRow(selectedPerson);
+  };
+
+  onApplyColumnForAllUser = async e => {
+    e.preventDefault();
+    return this.updateLineLimits('columns');
+  };
+
+  onApplySwimlaneForAllUser = async e => {
+    e.preventDefault();
+    return this.updateLineLimits('swimlanes');
   };
 
   onAddLimit = async e => {
@@ -128,8 +158,6 @@ export default class PersonalWIPLimit extends PageModification {
     };
 
     this.personLimits.limits.push(personLimit);
-
-    await this.updateBoardProperty(BOARD_PROPERTIES.PERSON_LIMITS, this.personLimits);
 
     this.renderRow(personLimit);
   };
@@ -197,15 +225,17 @@ export default class PersonalWIPLimit extends PageModification {
     this.personLimits.limits.forEach(personLimit => this.renderRow(personLimit));
   }
 
-  renderAllRow() {
+  renderAllRow(idsUsersForChecked) {
     this.popup.htmlElement.querySelectorAll('.person-row').forEach(row => row.remove());
-    this.personLimits.limits.forEach(personLimit => this.renderRow(personLimit));
+    this.personLimits.limits.forEach(personLimit =>
+      this.renderRow(personLimit, idsUsersForChecked != null ? idsUsersForChecked.indexOf(personLimit.id) > -1 : false)
+    );
   }
 
-  renderRow(personLimit) {
+  renderRow(personLimit, isChecked) {
     const { id } = personLimit;
 
-    this.DOMtablePersonalWipLimit.insertAdjacentHTML('beforeend', addPersonalWipLimit(personLimit));
+    this.DOMtablePersonalWipLimit.insertAdjacentHTML('beforeend', addPersonalWipLimit(personLimit, isChecked));
 
     document.getElementById(`delete-${id}`).addEventListener('click', async () => {
       await this.onDeleteLimit(id);
@@ -215,6 +245,13 @@ export default class PersonalWIPLimit extends PageModification {
     document.getElementById(`edit-${id}`).addEventListener('click', async () => {
       await this.onEdit(id);
     });
+  }
+
+  getSelectedPerson() {
+    const DOMCheckboxUsers = document.querySelectorAll(
+      `#${settingsJiraDOM.idTablePersonalWipLimit} input.select-user-chb:checked`
+    );
+    return Array.from(DOMCheckboxUsers).map(cb => parseInt(cb.getAttribute('data-id'), 10));
   }
 
   getDataForm() {
